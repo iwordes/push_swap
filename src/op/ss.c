@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:47:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/22 14:48:14 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/22 16:10:32 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	op_ss(t_stack *a, t_stack *b)
 {
-	op_sa(a, b);
-	op_sb(a, b);
+	op__swap(a);
+	op__swap(b);
 }

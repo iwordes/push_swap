@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   _swap.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/22 16:11:02 by iwordes          ###   ########.fr       */
+/*   Created: 2017/03/22 16:07:51 by iwordes           #+#    #+#             */
+/*   Updated: 2017/03/22 16:08:43 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-/*
-** Sort Mk.I: Insertion (Basic Sort)
-*/
+#define S s->arr
+#define S1 S[s->len - 1]
+#define S2 S[s->len - 2]
 
-#define A a->arr
-#define B b->arr
-
-#define A1 A[a->len - 1]
-#define A2 A[a->len - 2]
-
-void	sort(t_stack *a, t_stack *b)
+void	op__swap(t_stack *s)
 {
-	(void)a;
-	(void)b;
+	int	tmp;
+
+	tmp = S1;
+	S1 = S2;
+	S2 = tmp;
 }

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/22 15:05:40 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/22 16:10:42 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void			error(void);
 
 void			op__rot(t_stack *s);
 void			op__rrot(t_stack *s);
+void			op__swap(t_stack *s);
 
 void			op_pa(t_stack *a, t_stack *b);
 void			op_pb(t_stack *a, t_stack *b);

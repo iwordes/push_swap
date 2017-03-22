@@ -6,7 +6,7 @@
 #    By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 19:45:22 by iwordes           #+#    #+#              #
-#    Updated: 2017/03/22 15:41:57 by iwordes          ###   ########.fr        #
+#    Updated: 2017/03/22 16:10:18 by iwordes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC     = gcc
 CF    += -Wall -Wextra -Werror -I include
 CF    += -L lib/ft -l ft -I lib/ft/include
 
-SRC_OP = pa.c pb.c ra.c rb.c rr.c rra.c rrb.c rrr.c sa.c sb.c ss.c _rot.c _rrot.c
+SRC_OP = pa.c pb.c ra.c rb.c rr.c rra.c rrb.c rrr.c sa.c sb.c ss.c _rot.c _rrot.c _swap.c
 SRC    = check.c error.c init.c main.c sort.c
 SRC   += $(addprefix op/,$(SRC_OP))
 SRC   := $(addprefix src/,$(SRC))
