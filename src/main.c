@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/22 15:36:32 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/22 16:24:25 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			main(int argc, char **argv)
 	t_stack	b;
 
 	init(&a, &b, argc, argv);
-	// sort(&a, &b);
+	sort(&a, &b);
 	free(a.arr);
 	free(b.arr);
 	return (0);
