@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/22 16:10:42 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/28 15:57:06 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ typedef struct	s_stack
 void			init(t_stack *a, t_stack *b, int argc, char **argv);
 void			sort(t_stack *a, t_stack *b);
 bool			check(t_stack *a, t_stack *b);
+int				check_ps(t_stack *a);
 
 void			error(void);
 
+#define OARGS void (*f)(t_stack*, t_stack*), t_stack *a, t_stack *b
+void			op__(const char *s, OARGS);
 void			op__rot(t_stack *s);
 void			op__rrot(t_stack *s);
 void			op__swap(t_stack *s);

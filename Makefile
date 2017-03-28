@@ -17,8 +17,8 @@ CC     = gcc
 CF    += -Wall -Wextra -Werror -I include
 CF    += -L lib/ft -l ft -I lib/ft/include
 
-SRC_OP = pa.c pb.c ra.c rb.c rr.c rra.c rrb.c rrr.c sa.c sb.c ss.c _rot.c _rrot.c _swap.c
-SRC    = check.c error.c init.c main.c sort.c
+SRC_OP = pa.c pb.c ra.c rb.c rr.c rra.c rrb.c rrr.c sa.c sb.c ss.c _.c _rot.c _rrot.c _swap.c
+SRC    = check.c check_ps.c error.c init.c main.c sort.c
 SRC   += $(addprefix op/,$(SRC_OP))
 SRC   := $(addprefix src/,$(SRC))
 
