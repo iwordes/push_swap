@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/28 16:16:20 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/28 16:48:20 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void	find_sort(t_stack *a, t_stack *b)
 	int		sh;
 	int		cache;
 
-	ft_eprintf("\e[91mfind_sort\e[0m\n");
 	o = 0;
 	fo = 0;
 	sh = INT_MIN;
