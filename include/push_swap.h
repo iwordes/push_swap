@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/28 15:57:06 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/28 16:14:26 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # define UINT unsigned
 # define MGUARD(MEM) if ((MEM) == NULL) exit(12)
+# define H2(N) (N / 2 + (N & 1))
 
 typedef struct	s_stack
 {

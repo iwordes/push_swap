@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:52:28 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/22 15:35:04 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/28 16:39:01 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	op__rrot(t_stack *s)
 	int		tmp;
 
 	tmp = S[0];
-	i = 1;
-	while (i < s->len)
+	i = s->len - 1;
+	while (i)
 	{
 		S[i - 1] = S[i];
-		i += 1;
+		i -= 1;
 	}
 	S1 = tmp;
 }
