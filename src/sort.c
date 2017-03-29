@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 15:25:31 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 15:33:58 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	do_sort(t_stack *a, t_stack *b, int o, int to)
 }
 
 #define NEED_MOVE (cache != 0)
-#define SHORTER (ABS(o) + ABS(cache) < ABS(fo) + ABS(sh))
+#define SHORTER ((UINT)(ABS(o) + ABS(cache)) < (UINT)(ABS(fo) + ABS(sh)))
 
 static void	find_sort(t_stack *a, t_stack *b)
 {
@@ -110,11 +110,16 @@ static void	find_sort(t_stack *a, t_stack *b)
 	ft_eprintf("])\e[0m\n");
 
 	o = 0;
-	fo = INT_MIN;
-	sh = INT_MIN;
+	fo = INT_MAX;
+	sh = INT_MAX;
 	while ((UINT)ABS(o) <= a->len / 2)
 	{
 		cache = try_sort(a, o);
+		ft_eprintf("\e[96m| o| == %u, |cache| == %u\n", ABS(o), ABS(cache));
+		ft_eprintf("|fo| == %u, |   sh| == %u\n", ABS(fo), ABS(sh));
+		ft_eprintf("x1 = |o| + |cache| == %u\n", ABS(o) + ABS(cache));
+		ft_eprintf("x2 = |fo| + |sh| == %u\e[0m\n", ABS(fo) + ABS(sh));
+		ft_eprintf("x1 < x2: %i\n", SHORTER);
 		if (NEED_MOVE && SHORTER)
 		{
 			ft_eprintf("SET (%u, %i)\n", o, cache);
