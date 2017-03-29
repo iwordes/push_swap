@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/28 15:57:28 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 13:12:29 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,16 @@ int			main(int argc, char **argv)
 	t_stack	b;
 
 	init(&a, &b, argc, argv);
+	show(&a, &b);
 	while (ft_readln(0, &op) > 0)
 	{
 		i = ~0;
 		while (g_opc[i += 1] != NULL)
 			if (ft_strequ(g_opc[i], op))
 			{
+				ft_putendl(op);
 				g_op[i](&a, &b);
+				show(&a, &b);
 				break ;
 			}
 		free(op);

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:11:17 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/22 15:05:22 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 14:30:52 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void		init(t_stack *a, t_stack *b, int argc, char **argv)
 	i = 1;
 	b->len = 0;
 	a->len = argc - 1;
+	a->min = INT_MAX;
+	a->max = INT_MIN;
 	MGUARD(a->arr = MALT(int, argc - 1));
 	MGUARD(b->arr = MALT(int, argc - 1));
 	while (i < argc)
@@ -43,6 +45,8 @@ void		init(t_stack *a, t_stack *b, int argc, char **argv)
 		n = ft_atoi(argv[i]);
 		if (n > INT_MAX)
 			error();
+		(a->max < n) && (a->max = n);
+		(a->min > n) && (a->min = n);
 		a->arr[a->len - i] = n;
 		i += 1;
 	}

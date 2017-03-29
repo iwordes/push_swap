@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/28 16:48:20 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 15:18:34 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,65 +27,104 @@
 
 #define OP(O) op__(#O, op_##O, a, b)
 
-static int	try_sort(t_stack *a, UINT o)
+static int	try_sort(t_stack *a, int o)
 {
+	t_stack	s;
 	int		n;
 
-	while (o--)
-		op__rrot(a);
+	s = *a;
+	s.arr = MALT(int, a->len);
+	ft_memcpy(s.arr, a->arr, sizeof(int) * a->len);
+
+	ft_eprintf("\e[1;95mtry_sort\e[0;95m([", o);
+	for (unsigned k = 0; k < s.len; k += 1)
+		ft_eprintf("%s%d", (k > 0) ? ", " : "", s.arr[k]);
+	ft_eprintf("]\e[1m<\e[0;95m, % i)", o);
+
+	if (o < 0)
+		while (o++)
+			op__rrot(&s);
+	else
+		while (o--)
+			op__rot(&s);
+
 	o = 0;
-	n = A1;
-	op__rot(a);
-	a->len -= 1;
-	while (n > A1)
+	n = S1;
+	ft_printf(" (%i)", n);
+
+	//op__rot(a);
+	s.len -= 1;
+	if (n == s.min || n == s.max)
 	{
-		op__rrot(a);
+		ft_eprintf(" |\e[91mM\e[95m|\n");
+		free(s.arr);
+		return (0);
+	}
+	while ((UINT)o < s.len && n > S1)
+	{
+		op__rot(&s);
 		o += 1;
 	}
-	return (o >= a->len / 2 ? a->len - o : o);
+	ft_eprintf(" -> %u\e[0m\n", o);
+	free(s.arr);
+	return (/*o >= H2(a->len) ? a->len - o : */o);
 }
 
 static void	do_sort(t_stack *a, t_stack *b, int o, int to)
 {
-	if (o < 0)
-		while (o++)
+	ft_eprintf("\e[93mdo_sort(%i, %i)\e[0m\n", o, to);
+	if (to > 5 || to < -5)
+	{
+		ft_eprintf("\e[91m>> ERROR <<\e[0m\n");
+		exit(1);
+	}
+	if (o >= 0)
+		while (o--)
 			OP(ra);
 	else
-		while (o--)
+		while (o++)
 			OP(rra);
 	OP(pb);
-	if (to < 0)
-		while (to++)
+	if (to >= 0)
+		while (to--)
 			OP(ra);
 	else
-		while (to--)
+		while (to++)
 			OP(rra);
 	OP(pa);
 }
 
+#define NEED_MOVE (cache != 0)
+#define SHORTER (ABS(o) + ABS(cache) < ABS(fo) + ABS(sh))
+
 static void	find_sort(t_stack *a, t_stack *b)
 {
-	t_stack	s;
-	UINT	o;
-	UINT	fo;
+	int		o;
+	int		fo;
 	int		sh;
 	int		cache;
 
+	ft_eprintf("\e[92mfind_sort([");
+	for (unsigned k = 0; k < a->len; k += 1)
+		ft_eprintf("%s%d", (k > 0) ? ", " : "", a->arr[k]);
+	ft_eprintf("])\e[0m\n");
+
 	o = 0;
-	fo = 0;
+	fo = INT_MIN;
 	sh = INT_MIN;
-	while (o < a->len)
+	while ((UINT)ABS(o) <= a->len / 2)
 	{
-		s = *a;
 		cache = try_sort(a, o);
-		if (o + ABS(cache) < (UINT)ABS(sh))
+		if (NEED_MOVE && SHORTER)
 		{
+			ft_eprintf("SET (%u, %i)\n", o, cache);
 			sh = cache;
 			fo = o;
 		}
-		o += 1;
+		o = (o < 0) ? -o : -(o + 1);
 	}
-	do_sort(a, b, (fo >= a->len / 2) ? a->len - fo : fo, sh);
+	ft_eprintf("\e[93mfinal: o = %i, fo = %i\e[0m\n", o, fo);
+	do_sort(a, b, fo, sh);
 }
 
 void		sort(t_stack *a, t_stack *b)
