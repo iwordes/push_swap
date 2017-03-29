@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 16:28:05 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 16:29:38 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	try_sort(t_stack *a, int o)
 
 	stk_cpy(&s, a);
 
-	ft_eprintf("\e[1;95mtry_sort\e[0;95m[% i]", o);
+	//ft_eprintf("\e[1;95mtry_sort\e[0;95m[% i]", o);
 
 	if (o < 0)
 		while (o++)
@@ -46,10 +46,10 @@ static int	try_sort(t_stack *a, int o)
 	o = 0;
 	n = S1;
 	s.len -= 1;
-	ft_printf(" (%i)", n);
+	//ft_printf(" (%i)", n);
 	if (n == s.min || n == s.max)
 	{
-		ft_eprintf(" |\e[91mM\e[95m|\n");
+		//ft_eprintf(" |\e[91mM\e[95m|\n");
 		free(s.arr);
 		return (0);
 	}
@@ -59,14 +59,14 @@ static int	try_sort(t_stack *a, int o)
 		op__rot(&s);
 		o += 1;
 	}
-	ft_eprintf(" -> %u\e[0m\n", o);
+	//ft_eprintf(" -> %u\e[0m\n", o);
 	free(s.arr);
 	return (/*o >= H2(a->len) ? a->len - o : */o);
 }
 
 static void	do_sort(t_stack *a, t_stack *b, int o, int to)
 {
-	ft_eprintf("\e[93mdo_sort(%i, %i)\e[0m\n", o, to);
+	//ft_eprintf("\e[93mdo_sort(%i, %i)\e[0m\n", o, to);
 	/*if (to > 5 || to < -5)
 	{
 		ft_eprintf("\e[91m>> ERROR <<\e[0m\n");
@@ -98,10 +98,10 @@ static void	find_sort(t_stack *a, t_stack *b)
 	int		sh;
 	int		cache;
 
-	ft_eprintf("\e[92mfind_sort([");
-	for (unsigned k = 0; k < a->len; k += 1)
-		ft_eprintf("%s%d", (k > 0) ? ", " : "", a->arr[k]);
-	ft_eprintf("])\e[0m\n");
+	//ft_eprintf("\e[92mfind_sort([");
+	//for (unsigned k = 0; k < a->len; k += 1)
+	//	ft_eprintf("%s%d", (k > 0) ? ", " : "", a->arr[k]);
+	//ft_eprintf("])\e[0m\n");
 
 	o = 0;
 	fo = INT_MAX;
@@ -112,13 +112,13 @@ static void	find_sort(t_stack *a, t_stack *b)
 		cache = try_sort(a, o);
 		if (NEED_MOVE && SHORTER)
 		{
-			ft_eprintf("SET (%i, %i)\n", o, cache);
+			//ft_eprintf("SET (%i, %i)\n", o, cache);
 			sh = cache;
 			fo = o;
 		}
 		o = (o < 0) ? -o : -(o + 1);
 	}
-	ft_eprintf("\e[93mfinal: o = %i, fo = %i\e[0m\n", o, fo);
+	//ft_eprintf("\e[93mfinal: o = %i, fo = %i\e[0m\n", o, fo);
 	do_sort(a, b, fo, sh);
 }
 
@@ -135,8 +135,8 @@ void		sort(t_stack *a, t_stack *b)
 		while (o--)
 			OP(ra);
 
-	ft_eprintf("\e[92m[");
-	for (unsigned k = a->len - 1; k; k--)
-		ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
-	ft_eprintf("]\e[0m\n");
+	//ft_eprintf("\e[92m[");
+	//for (unsigned k = a->len - 1; k; k--)
+	//	ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
+	//ft_eprintf("]\e[0m\n");
 }

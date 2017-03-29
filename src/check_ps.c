@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 14:13:07 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 16:12:31 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 16:29:54 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		check_ps(t_stack *a)
 
 	o = 0;
 	stk_cpy(&s, a);
-	ft_eprintf("\e[93mCHECK: ");
+	//ft_eprintf("\e[93mCHECK: ");
 	while (S1 <= S2 && (UINT)o < a->len)
 	{
 		op__rot(&s);
@@ -45,13 +45,13 @@ int		check_ps(t_stack *a)
 	{
 		if (S[i] < S[i + 1])
 		{
-			ft_eprintf("\e[91mUNSORTED\e[0m\n", o);
+			//ft_eprintf("\e[91mUNSORTED\e[0m\n", o);
 			break ;
 		}
 		i += 1;
 	}
 	free(s.arr);
-	if (i + 1 == s.len)
-		ft_eprintf("\e[92mSORTED\e[93m (%i)\e[0m\n", o);
+	//if (i + 1 == s.len)
+	//	ft_eprintf("\e[92mSORTED\e[93m (%i)\e[0m\n", o);
 	return ((i + 1 == s.len) ? o : INT_MIN);
 }
