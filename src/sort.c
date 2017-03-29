@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 15:18:34 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 15:25:31 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ static int	try_sort(t_stack *a, int o)
 
 	//op__rot(a);
 	s.len -= 1;
-	if (n == s.min || n == s.max)
+	/*if (n == s.min || n == s.max)
 	{
 		ft_eprintf(" |\e[91mM\e[95m|\n");
 		free(s.arr);
 		return (0);
-	}
-	while ((UINT)o < s.len && n > S1)
+	}*/
+	while ((UINT)o < s.len && (S[0] < n || n < S1))
 	{
 		op__rot(&s);
 		o += 1;
