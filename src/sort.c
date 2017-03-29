@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 16:24:54 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 16:28:05 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,9 @@ void		sort(t_stack *a, t_stack *b)
 	else
 		while (o--)
 			OP(ra);
+
+	ft_eprintf("\e[92m[");
+	for (unsigned k = a->len - 1; k; k--)
+		ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
+	ft_eprintf("]\e[0m\n");
 }
