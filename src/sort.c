@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 15:33:58 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 16:24:54 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,9 @@ static int	try_sort(t_stack *a, int o)
 	t_stack	s;
 	int		n;
 
-	s = *a;
-	s.arr = MALT(int, a->len);
-	ft_memcpy(s.arr, a->arr, sizeof(int) * a->len);
+	stk_cpy(&s, a);
 
-	ft_eprintf("\e[1;95mtry_sort\e[0;95m([", o);
-	for (unsigned k = 0; k < s.len; k += 1)
-		ft_eprintf("%s%d", (k > 0) ? ", " : "", s.arr[k]);
-	ft_eprintf("]\e[1m<\e[0;95m, % i)", o);
+	ft_eprintf("\e[1;95mtry_sort\e[0;95m[% i]", o);
 
 	if (o < 0)
 		while (o++)
@@ -50,17 +45,16 @@ static int	try_sort(t_stack *a, int o)
 
 	o = 0;
 	n = S1;
-	ft_printf(" (%i)", n);
-
-	//op__rot(a);
 	s.len -= 1;
-	/*if (n == s.min || n == s.max)
+	ft_printf(" (%i)", n);
+	if (n == s.min || n == s.max)
 	{
 		ft_eprintf(" |\e[91mM\e[95m|\n");
 		free(s.arr);
 		return (0);
-	}*/
-	while ((UINT)o < s.len && (S[0] < n || n < S1))
+	}
+	// TODO: Better constraint.
+	while (S[0] > n || n > S1)
 	{
 		op__rot(&s);
 		o += 1;
@@ -73,11 +67,11 @@ static int	try_sort(t_stack *a, int o)
 static void	do_sort(t_stack *a, t_stack *b, int o, int to)
 {
 	ft_eprintf("\e[93mdo_sort(%i, %i)\e[0m\n", o, to);
-	if (to > 5 || to < -5)
+	/*if (to > 5 || to < -5)
 	{
 		ft_eprintf("\e[91m>> ERROR <<\e[0m\n");
 		exit(1);
-	}
+	}*/
 	if (o >= 0)
 		while (o--)
 			OP(ra);
@@ -112,17 +106,13 @@ static void	find_sort(t_stack *a, t_stack *b)
 	o = 0;
 	fo = INT_MAX;
 	sh = INT_MAX;
+	// TODO: Make this condition work optimally on both even and odd stacks
 	while ((UINT)ABS(o) <= a->len / 2)
 	{
 		cache = try_sort(a, o);
-		ft_eprintf("\e[96m| o| == %u, |cache| == %u\n", ABS(o), ABS(cache));
-		ft_eprintf("|fo| == %u, |   sh| == %u\n", ABS(fo), ABS(sh));
-		ft_eprintf("x1 = |o| + |cache| == %u\n", ABS(o) + ABS(cache));
-		ft_eprintf("x2 = |fo| + |sh| == %u\e[0m\n", ABS(fo) + ABS(sh));
-		ft_eprintf("x1 < x2: %i\n", SHORTER);
 		if (NEED_MOVE && SHORTER)
 		{
-			ft_eprintf("SET (%u, %i)\n", o, cache);
+			ft_eprintf("SET (%i, %i)\n", o, cache);
 			sh = cache;
 			fo = o;
 		}

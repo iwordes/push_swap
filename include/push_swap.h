@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 14:28:25 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 15:45:18 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void			sort(t_stack *a, t_stack *b);
 void			show(t_stack *a, t_stack *b);
 bool			check(t_stack *a, t_stack *b);
 int				check_ps(t_stack *a);
+
+void			stk_cpy(t_stack *dest, t_stack *src);
 
 void			error(void);
 
