@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 16:29:38 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 16:31:44 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	try_sort(t_stack *a, int o)
 	}
 	//ft_eprintf(" -> %u\e[0m\n", o);
 	free(s.arr);
-	return (/*o >= H2(a->len) ? a->len - o : */o);
+	return (/*(UINT)o >= H2(s.len) ? s.len - o : */o);
 }
 
 static void	do_sort(t_stack *a, t_stack *b, int o, int to)
