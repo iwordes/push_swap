@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 17:28:00 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 17:33:05 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,17 @@ static void	find_sort(t_stack *a, t_stack *b)
 		cache = try_sort(a, o);
 		if (NEED_MOVE && SHORTER)
 		{
+
 			ft_eprintf("SET (%i, %i)\n", o, cache);
+
 			sh = cache;
 			fo = o;
 		}
 		o = (o < 0) ? -o : -(o + 1);
 	}
+
 	ft_eprintf("\e[93mfinal: o = %i, fo = %i\e[0m\n", o, fo);
+
 	do_sort(a, b, fo, sh);
 }
 
