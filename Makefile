@@ -40,6 +40,11 @@ fclean: clean
 .PHONY: re
 re: fclean all
 
+.PHONY: test
+test:
+	make
+	n=`echo $$(~/test/rand $N)` sh -c './push_swap $$n | ./checker $$n'
+
 # ------------------------------------------------------------------------------
 # Real Targets
 

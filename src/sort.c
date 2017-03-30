@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 20:08:27 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/30 15:12:29 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,29 @@
 
 #define A1 A[a->len - 1]
 #define A2 A[a->len - 2]
+#define B1 B[b->len - 1]
+#define B2 B[b->len - 2]
 #define S1 S[s.len - 1]
 #define S2 S[s.len - 2]
 
 #define OP(O) op__(#O, op_##O, a, b)
 
-#define CUR A[a->len - 1 - o]
-#define ROTOPT (mo > a->len / 2 + (a->len & 1)) ? mo - a->len : mo
+#define CUR A[(o < 0) ? ~o : a->len - 1 - o]
+#define ROTOPT (mo > H2(a->len) ? mo - a->len : mo)
+#define SYNT_HL_BOUND
 
-static int	find_min(t_stack *a)
+static int	find(t_stack *a)
 {
 	int		o;
-	int		mn;
-	int		mo;
 
 	o = 0;
-	mn = INT_MAX;
-	mo = INT_MAX;
-	while (o < a->len)
+	while (ABS(o) < H2(a->len))
 	{
 		if (CUR < mn)
-		{
-			mn = CUR;
-			mo = o;
-		}
-		o += 1;
+			return (o);
+		o = -o + (o <= 0);
 	}
-	return (ROTOPT);
+	return (INT_MIN);
 }
 
 void		sort(t_stack *a, t_stack *b)
@@ -57,7 +53,7 @@ void		sort(t_stack *a, t_stack *b)
 
 	while (a->len > 1)
 	{
-		o = find_min(a);
+		o = find(a);
 		if (o < 0)
 			while (o++)
 				OP(rra);
