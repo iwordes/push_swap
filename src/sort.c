@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 19:44:12 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 20:08:27 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,9 @@ static int	find_min(t_stack *a)
 
 void		sort(t_stack *a, t_stack *b)
 {
-	ft_eprintf("\e[93m[");
-	for (int k = a->len - 1; k >= 0; k--)
-		ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
-	ft_eprintf("]\e[0m\n");
-
-
 	int		o;
 
-	while (a->len != 0)
+	while (a->len > 1)
 	{
 		o = find_min(a);
 		if (o < 0)
