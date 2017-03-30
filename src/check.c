@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:03:57 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/22 16:32:13 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 19:03:14 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 bool	check(t_stack *a, t_stack *b)
 {
-	size_t	i;
+	int		i;
 
 	i = 1;
 	while (i < a->len)

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 14:13:07 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 16:52:40 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 19:03:42 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int		check_ps(t_stack *a)
 {
 	t_stack	s;
-	UINT	i;
+	int		i;
 	int		o;
 
 	o = 0;
@@ -31,16 +31,16 @@ int		check_ps(t_stack *a)
 
 	ft_eprintf("\e[93mCHECK: ");
 
-	while (S1 <= S2 && (UINT)o < a->len)
+	while (S1 <= S2 && o < a->len)
 	{
 		op__rot(&s);
 		o += 1;
 	}
 	op__rot(&s);
 	o += 1;
-	if ((UINT)o >= s.len)
+	if (o >= s.len)
 		o %= s.len;
-	if ((UINT)o >= H2(s.len))
+	if (o >= H2(s.len))
 		o -= s.len;
 	i = 0;
 	while (i + 1 < s.len)

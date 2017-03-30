@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 15:45:18 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 19:01:45 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct	s_stack
 	int			*arr;
 	int			min;
 	int			max;
-	size_t		len;
+	int			len;
 }				t_stack;
 
 void			init(t_stack *a, t_stack *b, int argc, char **argv);
