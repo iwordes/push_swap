@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 19:02:44 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/29 19:39:29 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define OP(O) op__(#O, op_##O, a, b)
 
 #define CUR A[a->len - 1 - o]
-#define ROTOPT (o > a->len / 2) ? a->len/* - 1*/ - o : o
+#define ROTOPT (mo > a->len / 2 + (a->len & 1)) ? a->len - 1 - mo : mo
 
 static int	find_min(t_stack *a)
 {
@@ -53,10 +53,10 @@ static int	find_min(t_stack *a)
 
 void		sort(t_stack *a, t_stack *b)
 {
-	ft_eprintf("\e[93m[");
-	for (int k = a->len - 1; k >= 0; k--)
-		ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
-	ft_eprintf("]\e[0m\n");
+	//ft_eprintf("\e[93m[");
+	//for (int k = a->len - 1; k >= 0; k--)
+	//	ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
+	//ft_eprintf("]\e[0m\n");
 
 
 	int		o;
@@ -76,8 +76,8 @@ void		sort(t_stack *a, t_stack *b)
 		OP(pa);
 
 
-	ft_eprintf("\e[92m[");
-	for (int k = a->len - 1; k >= 0; k--)
-		ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
-	ft_eprintf("]\e[0m\n");
+	//ft_eprintf("\e[92m[");
+	//for (int k = a->len - 1; k >= 0; k--)
+	//	ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
+	//ft_eprintf("]\e[0m\n");
 }
