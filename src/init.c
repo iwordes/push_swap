@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:11:17 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/29 19:00:17 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/30 19:16:35 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define ISDIG(C) (C >= '0' && C <= '9')
 
-bool		val_num(char *num)
+static bool	val_num(char *num)
 {
 	while (ft_isspace(*num))
 		num += 1;
@@ -31,7 +31,8 @@ void		init(t_stack *a, t_stack *b, int argc, char **argv)
 	long	n;
 
 	i = 1;
-	b->len = 0;
+	ft_bzero(a, sizeof(t_stack));
+	ft_bzero(b, sizeof(t_stack));
 	a->len = argc - 1;
 	MGUARD(a->arr = MALT(int, argc - 1));
 	MGUARD(b->arr = MALT(int, argc - 1));
@@ -44,6 +45,8 @@ void		init(t_stack *a, t_stack *b, int argc, char **argv)
 		if (n > INT_MAX)
 			error();
 		a->arr[a->len - i] = n;
+		(n < a->min) && (a->min = n);
+		(n > a->max) && (a->max = n);
 		i += 1;
 	}
 	if (i == 1)
