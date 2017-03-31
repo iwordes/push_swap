@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:11:17 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 19:16:35 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/30 19:33:48 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,25 @@ static bool	val_num(char *num)
 	return (*num == 0 || ft_isspace(*num));
 }
 
+void		init_(t_stack *a, t_stack *b, int argc)
+{
+	b->len = 0;
+	a->len = argc - 1;
+	a->min = INT_MAX;
+	b->min = INT_MAX;
+	a->max = INT_MIN;
+	b->max = INT_MIN;
+	MGUARD(a->arr = MALT(int, argc - 1));
+	MGUARD(b->arr = MALT(int, argc - 1));
+}
+
 void		init(t_stack *a, t_stack *b, int argc, char **argv)
 {
 	int		i;
 	long	n;
 
 	i = 1;
-	ft_bzero(a, sizeof(t_stack));
-	ft_bzero(b, sizeof(t_stack));
-	a->len = argc - 1;
-	MGUARD(a->arr = MALT(int, argc - 1));
-	MGUARD(b->arr = MALT(int, argc - 1));
+	init_(a, b, argc);
 	while (i < argc)
 	{
 		if (!val_num(argv[i]))
