@@ -6,28 +6,36 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:43:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 15:49:47 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/30 18:22:58 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	op__srot(t_stack *s, int o, bool verbose)
+static void	putop(char *op, char s)
+{
+	if (s)
+	{
+		ft_putstr(op);
+		write(1, &s, 1);
+		write(1, "\n", 1);
+	}
+}
+
+void	op__srot(t_stack *s, int o, char name)
 {
 	//o %= s->len;
 	//(o - s->len >= s->len / 2) && (o -= s->len);
 	if (o < 0)
 		while (o++)
 		{
-			if (verbose)
-				ft_putstr("rrot\n");
+			putop("rr", name);
 			op__rrot(s);
 		}
 	else
 		while (o--)
 		{
-			if (verbose)
-				ft_putstr("rot\n");
+			putop("r", name);
 			op__rot(s);
 		}
 }
