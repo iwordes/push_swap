@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pa.c                                               :+:      :+:    :+:   */
+/*   minmax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/22 12:35:48 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 19:51:12 by iwordes          ###   ########.fr       */
+/*   Created: 2017/03/30 19:28:12 by iwordes           #+#    #+#             */
+/*   Updated: 2017/03/30 19:34:29 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-#define A a->arr
-#define B1 b->arr[b->len - 1]
+#define S s->arr
 
-void	op_pa(t_stack *a, t_stack *b)
+void	minmax(t_stack *s)
 {
-	A[a->len] = B1;
-	a->len += 1;
-	b->len -= 1;
-	minmax(a);
-	minmax(b);
+	int		i;
+
+	i = 0;
+	s->min = INT_MAX;
+	s->max = INT_MIN;
+	while (i < s->len)
+	{
+		if (s->min > S[i])
+			s->min = S[i];
+		if (s->max < S[i])
+			s->max = S[i];
+		i += 1;
+	}
 }

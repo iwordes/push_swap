@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 15:46:38 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/30 19:30:21 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ bool			check(t_stack *a, t_stack *b);
 int				check_ps(t_stack *a);
 
 void			stk_cpy(t_stack *dest, t_stack *src);
+void			minmax(t_stack *s);
 
 void			error(void);
 
 #define OARGS void (*f)(t_stack*, t_stack*), t_stack *a, t_stack *b
 void			op__(const char *s, OARGS);
-void			op__srot(t_stack *s, int o, bool verbose);
 void			op__rot(t_stack *s);
 void			op__rrot(t_stack *s);
+void			op__srot(t_stack *s, int o, char name);
 void			op__swap(t_stack *s);
 
 void			op_pa(t_stack *a, t_stack *b);

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 15:47:04 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/30 20:01:56 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,91 @@
 
 #define A a->arr
 #define B b->arr
-#define S s.arr
+#define S s->arr
 
-#define TA A[a->len - 1]
-#define TB B[b->len - 1]
+#define A1 A[a->len - 1]
+#define A2 A[a->len - 2]
+
+#define B1 B[b->len - 1]
+#define B2 B[b->len - 2]
+
+#define TA A1
+#define TB B1
+#define BA A[0]
+#define BB B[0]
 
 #define OP(O) op__(#O, op_##O, a, b)
 
 #define CUR A[(o < 0) ? ~o : a->len - 1 - o]
 
-static int	find(t_stack *a, t_stack *b)
-{
-	int		o;
+// 1. Insert half of A into B, rotating B as necessary to sort input.
+// 2. Sort A.
+// 3. Merge into A.
 
-	o = 0;
-	while (ABS(o) < H2(a->len))
-	{
-		// ...
-		(void)b;
-		o = -o + (o <= 0);
-	}
-	return (INT_MIN);
+// TODO: Simplify
+// Invert, ((offset), cap)
+#define I s->len - 1 - ((b + i) % s->len)
+
+static int	best(t_stack *s, int n)
+{
+	int		b;
+	int		i;
+
+	b = 0;
+	i = 1;
+	while (S[b] != s->min)
+		b += 1;
+	while (i < s->len && !(S[I - 1] > n && n > S[I]))
+		i += 1;
+	return (I);
 }
+
+static void	sort1(t_stack *a, t_stack *b)
+{
+	int		i;
+
+	OP(pb);
+	OP(pb);
+	if (B1 < B2)
+		OP(sb);
+	// NOTE: Causes asymmetry
+	i = a->len/* / 2  TEMP */;
+	// Prefers B getting the extra elem
+	//i = a->len / 2 - 1 + (a->len & 1);
+	while (i--)
+	{
+		op__srot(b, best(b, TA), 'b');
+		OP(pb);
+	}
+}
+
+/*
+static void	sort2(t_stack *a, t_stack *b)
+{
+	// ...
+}
+
+static void	merge(t_stack *a, t_stack *b)
+{
+	// ...
+}
+*/
 
 void		sort(t_stack *a, t_stack *b)
 {
-	int		o;
+	/*ft_eprintf("----\n");
+	ft_eprintf("a->min: %i\n", a->min);
+	ft_eprintf("a->max: %i\n", a->max);
+	ft_eprintf("b->min: %i\n", b->min);
+	ft_eprintf("b->max: %i\n", b->max);
+	ft_eprintf("----\n");
+	for (int w = 0xFFFFF; w; w--);*/
 
-	while (a->len > 1)
-	{
-		o = find(a, b);
-		op__srot(a, o, true);
-		OP(pb);
-	}
-	while (b->len != 0)
-		OP(pa);
+	sort1(a, b);
+	//sort2(a, b);
+	//merge(a, b);
 
-
+	return;
 	ft_eprintf("\e[92m[");
 	for (int k = a->len - 1; k >= 0; k--)
 		ft_eprintf("%s%d", (k != a->len - 1) ? ", " : "", a->arr[k]);
