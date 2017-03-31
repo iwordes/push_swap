@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 20:01:56 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/03/30 20:03:21 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	best(t_stack *s, int n)
 		b += 1;
 	while (i < s->len && !(S[I - 1] > n && n > S[I]))
 		i += 1;
-	return (I);
+	return (b + i);
 }
 
 static void	sort1(t_stack *a, t_stack *b)
