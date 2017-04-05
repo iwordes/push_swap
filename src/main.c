@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 16:19:39 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 16:31:06 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			main(int argc, char **argv)
 	t_stack	b;
 
 	init(&a, &b, argc, argv);
-	show(&a, &b);
+	//show(&a, &b);
 
 	unsigned	c = 0;
 
@@ -103,7 +103,6 @@ int			main(int argc, char **argv)
 		ft_putstr("KO\n");
 
 	ft_eprintf("%u ops\n", c);
-	show(&a, &b);
 	free(a.arr);
 	free(b.arr);
 	return (0);

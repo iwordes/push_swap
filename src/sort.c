@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 16:20:49 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 16:39:14 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,6 @@ void		sort(t_stack *a, t_stack *b)
 	{
 		// 2a. Find the most effective move from B to A
 		best(a, b, &best_a, &best_b);
-
-		///
-		ft_eprintf("\e[92mb[%4d] -> a[%4d]\e[0m\n", best_b, best_a);
-		//ft_eprintf("  a->len: %d\n", a->len);
-		//ft_eprintf("  %d %% %d: %d\n", best_a, a->len, best_a % a->len);
-		//ft_eprintf("  OPT(%d): %d\n", best_a, OPT(best_a));
-		///
 
 		// 2b. Select A[best_a]
 		op__srot(a, best_a, 'a');
