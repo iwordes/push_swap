@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 14:41:42 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 14:42:50 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,11 @@
 
 #define A a->arr
 #define B b->arr
-#define S s->arr
 
 #define A1 A[a->len - 1]
 #define A2 A[a->len - 2]
 
-#define B1 B[b->len - 1]
-#define B2 B[b->len - 2]
-
-#define TA A1
-#define TB B1
-#define BA A[0]
-#define BB B[0]
-
 #define OP(O) op__(#O, op_##O, a, b)
-
-// 1. Insert half of A into B, rotating B as necessary to sort input.
-// 2. Sort A.
-// 3. Merge into A.
 
 /*
 ** The goal of sim() and best() is to determine WHERE to insert TA into B
@@ -55,12 +42,6 @@ static int	sim(t_stack *a, int o, int n)
 		i += 1;
 	return (OPT(i, a));
 }
-
-/*
-** New plan:
-** 1. Push all to b
-** 2. Sort into A
-*/
 
 #define CUR B[(bi < 0) ? ~bi : (b->len - 1) - bi]
 #define NEW (unsigned)(ABS(o + i) + ABS(bi))
