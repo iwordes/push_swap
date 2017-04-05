@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 10:46:51 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 13:04:08 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,40 +39,78 @@
 // 2. Sort A.
 // 3. Merge into A.
 
-// TODO: Simplify
 // Invert, ((offset), cap)
-#define I s->len - 1 - ((b + i) % s->len)
+#define I (b->len - 1 - ((bo + i) % b->len))
 
-static int	best(t_stack *s, int n)
+/*
+** The goal of sim() and best() is to determine WHERE to insert TA into B
+** and HOW to insert it there.
+*/
+
+static int	sim(int a, t_stack *b, int bo)
 {
-	int		b;
 	int		i;
 
-	b = 0;
 	i = 0;
-	while (S[b] != s->min)
-		b += 1;
-	while (i < s->len && n <= S[I])
+	while (a < B[I])
 		i += 1;
-	// Very close, but backwards??
-	return (b + i);
+	return (i);
 }
 
-static void	sort1(t_stack *a, t_stack *b)
+#define IBEST (ai < 0) ? (~ai) : (a->len - 1 - ai)
+#define ABS1 (unsigned)(ABS(ai) + ABS(bi) + ABS(bo))
+#define ABS2 (unsigned)(ABS(*best_a) + ABS(*best_b))
+
+static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 {
-	int		i;
+	int		ai;
+	int		bi;
+	int		bo;
+
+	ai = 0;
+	bi = 0;
+	bo = 0;
+	*best_a = INT_MAX;
+	*best_b = INT_MAX;
+	while (B[bo] != b->min)
+		bo += 1;
+	while (ABS(ai) < H2(a->len))
+	{
+		bi = sim(A[IBEST], b, bo);
+		if (ABS1 < ABS2)
+		{
+			ft_eprintf("\e[96m[SET]\e[0m\n");
+			*best_a = ai;
+			*best_b = bi + bo;
+		}
+		ai = -ai + (ai <= 0);
+	}
+}
+
+void		sort1(t_stack *a, t_stack *b)
+{
+	int		best_a;
+	int		best_b;
+	int		o;
 
 	OP(pb);
 	OP(pb);
 	if (B1 < B2)
 		OP(sb);
-	// Prefers B getting the extra elem
-	i = a->len /* / 2 - 1 + (a->len & 1) */;
-	while (i--)
+	while (a->len)
 	{
-		op__srot(b, best(b, TA), 'b');
+		best(a, b, &best_a, &best_b);
+		ft_eprintf("best: a%d b%d\n", best_a, best_b);
+		op__srot(a, best_a, 'a');
+		op__srot(b, best_b, 'b');
+		// op__goto(a, best_a);
+		// op__goto(b, best_b);
 		OP(pb);
 	}
+	while (b->len)
+		OP(pa);
+	o = check_ps(a);
+	op__srot(a, o, 'a');
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 11:42:18 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 12:37:12 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	sim(int a, t_stack *b, int bo)
 	return (i);
 }
 
-static int	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
+static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 {
 	int		ai;
 	int		bi;
@@ -39,15 +39,15 @@ static int	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 	ai = 0;
 	bi = 0;
 	bo = 0;
-	best_a = INT_MAX;
-	best_b = INT_MAX;
+	*best_a = INT_MAX;
+	*best_b = INT_MAX;
 	while (B[bo] != b->min)
 		bo += 1;
 	while (ABS(ai) < H2(a->len))
 	{
 		bi = sim(TA, b, bo);
-		ft_eprintf("Insert (%d) at [%d]\n", TA, bi + bo);
-		if (ai + (bi + bo) < *best_a + *best_b)
+		ft_eprintf("Insert [%d](%d) at [%d]\n", ai, TA, bi + bo);
+		if (ai + bi + bo < *best_a + *best_b)
 		{
 			*best_a = ai;
 			*best_b = bi + bo;
@@ -58,16 +58,27 @@ static int	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 
 void		sort1(t_stack *a, t_stack *b)
 {
-	int		i;
+	int		best_a;
+	int		best_b;
+	int		o;
 
 	OP(pb);
 	OP(pb);
 	if (B1 < B2)
 		OP(sb);
-	i = a->len /*/ 2 - 1 + (a->len & 1)*/;
-	while (i--)
+	while (a->len)
 	{
-		op__srot(b, best(b, TA), 'b');
+		best(a, b, &best_a, &best_b);
+		ft_eprintf("best: a%d b%d\n", best_a, best_b);
+		op__srot(a, best_a, 'a');
+		op__srot(b, best_b, 'b');
+		// op__goto(a, best_a);
+		// op__goto(b, best_b);
 		OP(pb);
 	}
+	while (b->len)
+		OP(pa);
+	o = check_ps(a);
+	ft_eprintf("Final offset: %d\n", o);
+	op__srot(a, o, 'a');
 }
