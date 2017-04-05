@@ -6,15 +6,11 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 14:42:50 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 15:27:05 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-
-/*
-** Sort Mk.II: Insertion
-*/
 
 #define A a->arr
 #define B b->arr
@@ -24,12 +20,7 @@
 
 #define OP(O) op__(#O, op_##O, a, b)
 
-/*
-** The goal of sim() and best() is to determine WHERE to insert TA into B
-** and HOW to insert it there.
-*/
-
-// Invert, ((offset), cap)
+// v Causing issues? Massive opcount jumps?
 #define OPT(UI, S) (UI > H2(S->len) ? S->len - 1 - UI : UI)
 #define I (a->len - 1 - ((o + i) % a->len))
 
@@ -40,7 +31,8 @@ static int	sim(t_stack *a, int o, int n)
 	i = 0;
 	while (i < a->len && n > A[I])
 		i += 1;
-	return (OPT(i, a));
+	return (i);
+	//return (OPT(i, a));
 }
 
 #define CUR B[(bi < 0) ? ~bi : (b->len - 1) - bi]
@@ -60,9 +52,9 @@ static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 	*best_b = INT_MAX;
 
 	// 1. Anchor the "zero" offset to the smallest number in A.
-	while (A[o] != a->min)
+	while (A[a->len - 1 - o] != a->min)
 		o += 1;
-	o = OPT(o, a);
+	//o = OPT(o, a);
 
 	// 2. Attempt all sorts into A.
 	while (ABS(bi) < H2(b->len))
@@ -91,8 +83,6 @@ void		sort(t_stack *a, t_stack *b)
 	// 1. Push into B.
 	while (a->len > 2)
 		OP(pb);
-	if (A1 > A2)
-		OP(sa);
 
 	// 2. Sort into A.
 	while (b->len)
@@ -112,6 +102,14 @@ void		sort(t_stack *a, t_stack *b)
 
 	// 3. Find the offset for sorted-A (if any)
 	o = check_ps(a);
+
+	///
+	if (o == INT_MIN)
+	{
+		ft_eprintf("\e[1;5;91mFAILURE\e[0m\n");
+		exit(-1);
+	}
+	///
 
 	// 4. Eliminate that offset.
 	op__srot(a, o, 'a');
