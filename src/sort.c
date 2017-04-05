@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 13:04:08 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 13:25:07 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 
 #define OP(O) op__(#O, op_##O, a, b)
 
-#define CUR A[(o < 0) ? ~o : a->len - 1 - o]
-
 // 1. Insert half of A into B, rotating B as necessary to sort input.
 // 2. Sort A.
 // 3. Merge into A.
@@ -52,12 +50,20 @@ static int	sim(int a, t_stack *b, int bo)
 	int		i;
 
 	i = 0;
-	while (a < B[I])
+	//ft_eprintf("\e[95mSIM\e[0m\n");
+	//ft_eprintf("a: %ld\n", a);
+	//ft_eprintf("b->max: %ld\n", b->max);
+	//ft_eprintf("a > b->max: %ld\n", a > b->max);
+	while (i < b->len && a < B[I])
+	{
+		//ft_eprintf("B[%d]: %d\n", I, B[I]);
 		i += 1;
+	}
+	//ft_eprintf("\e[95m/SET\e[0m\n");
 	return (i);
 }
 
-#define IBEST (ai < 0) ? (~ai) : (a->len - 1 - ai)
+#define CUR A[(ai < 0) ? ~ai : (a->len - 1) - ai]
 #define ABS1 (unsigned)(ABS(ai) + ABS(bi) + ABS(bo))
 #define ABS2 (unsigned)(ABS(*best_a) + ABS(*best_b))
 
@@ -76,10 +82,13 @@ static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 		bo += 1;
 	while (ABS(ai) < H2(a->len))
 	{
-		bi = sim(A[IBEST], b, bo);
+		//ft_eprintf("ai: %d | bo: %d\n", ai, bo);
+		//ft_eprintf("A[%d]: %d\n", (ai < 0) ? ~ai : (a->len - 1) - ai, CUR);
+		bi = sim(CUR, b, bo);
+		//ft_eprintf("ai: %d | bi: %d | bo: %d\n", ai, bi, bo);
 		if (ABS1 < ABS2)
 		{
-			ft_eprintf("\e[96m[SET]\e[0m\n");
+			//ft_eprintf("\e[96m[SET]\e[0m\n");
 			*best_a = ai;
 			*best_b = bi + bo;
 		}
@@ -100,7 +109,9 @@ void		sort1(t_stack *a, t_stack *b)
 	while (a->len)
 	{
 		best(a, b, &best_a, &best_b);
-		ft_eprintf("best: a%d b%d\n", best_a, best_b);
+
+		//ft_eprintf("best: a%d -> b%d\n", best_a, best_b);
+
 		op__srot(a, best_a, 'a');
 		op__srot(b, best_b, 'b');
 		// op__goto(a, best_a);

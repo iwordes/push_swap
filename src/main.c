@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 19:39:10 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 13:26:22 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int			main(int argc, char **argv)
 		while (g_opc[i += 1] != NULL)
 			if (ft_strequ(g_opc[i], op))
 			{
-				ft_putendl(op);
+				//ft_putendl(op);
 				g_op[i](&a, &b);
-				show(&a, &b);
+				//show(&a, &b);
 				break ;
 			}
 		free(op);
