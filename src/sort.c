@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 15:27:05 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 15:51:10 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,6 @@ void		sort(t_stack *a, t_stack *b)
 
 	// 3. Find the offset for sorted-A (if any)
 	o = check_ps(a);
-
-	///
-	if (o == INT_MIN)
-	{
-		ft_eprintf("\e[1;5;91mFAILURE\e[0m\n");
-		exit(-1);
-	}
-	///
 
 	// 4. Eliminate that offset.
 	op__srot(a, o, 'a');
