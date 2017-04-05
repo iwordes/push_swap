@@ -6,24 +6,54 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 19:49:47 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 11:42:18 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static int	best(t_stack *s, int n)
+// Invert, ((offset), cap)
+#define I (b->len - 1 - ((bo + i) % b->len))
+
+/*
+** The goal of sim() and best() is to determine WHERE to insert TA into B
+** and HOW to insert it there.
+*/
+
+static int	sim(int a, t_stack *b, int bo)
 {
-	int		b;
 	int		i;
 
-	b = 0;
-	i = 1;
-	while (S[b] != s->min)
-		b += 1;
-	while (i < s->len && !(S[I - 1] > n && n > S[I]))
+	i = 0;
+	while (a < B[I])
 		i += 1;
-	return (b + i);
+	return (i);
+}
+
+static int	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
+{
+	int		ai;
+	int		bi;
+	int		bo;
+
+	ai = 0;
+	bi = 0;
+	bo = 0;
+	best_a = INT_MAX;
+	best_b = INT_MAX;
+	while (B[bo] != b->min)
+		bo += 1;
+	while (ABS(ai) < H2(a->len))
+	{
+		bi = sim(TA, b, bo);
+		ft_eprintf("Insert (%d) at [%d]\n", TA, bi + bo);
+		if (ai + (bi + bo) < *best_a + *best_b)
+		{
+			*best_a = ai;
+			*best_b = bi + bo;
+		}
+		ai = -ai + (ai <= 0);
+	}
 }
 
 void		sort1(t_stack *a, t_stack *b)

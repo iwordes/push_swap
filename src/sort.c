@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 20:03:21 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 10:46:51 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ static int	best(t_stack *s, int n)
 	int		i;
 
 	b = 0;
-	i = 1;
+	i = 0;
 	while (S[b] != s->min)
 		b += 1;
-	while (i < s->len && !(S[I - 1] > n && n > S[I]))
+	while (i < s->len && n <= S[I])
 		i += 1;
+	// Very close, but backwards??
 	return (b + i);
 }
 
@@ -65,10 +66,8 @@ static void	sort1(t_stack *a, t_stack *b)
 	OP(pb);
 	if (B1 < B2)
 		OP(sb);
-	// NOTE: Causes asymmetry
-	i = a->len/* / 2  TEMP */;
 	// Prefers B getting the extra elem
-	//i = a->len / 2 - 1 + (a->len & 1);
+	i = a->len /* / 2 - 1 + (a->len & 1) */;
 	while (i--)
 	{
 		op__srot(b, best(b, TA), 'b');
