@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 14:19:24 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 14:41:42 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,18 @@
 */
 
 // Invert, ((offset), cap)
+#define OPT(UI, S) (UI > H2(S->len) ? S->len - 1 - UI : UI)
 #define I (a->len - 1 - ((o + i) % a->len))
-
-// Attempt to place TA into B
 
 static int	sim(t_stack *a, int o, int n)
 {
 	int		i;
 
 	i = 0;
-	while (i < a->len && n < A[I])
+	while (i < a->len && n > A[I])
 		i += 1;
-	ft_eprintf("sim:[%d][%d]\n", i < a->len, n < A[I]);
-	return (i);
+	return (OPT(i, a));
 }
-
-#define OPT(UI, S) (UI > H2(S->len) ? S->len - 1 - UI : UI)
-#define CUR A[(ai < 0) ? ~ai : (a->len - 1) - ai]
-#define ABS1 (unsigned)(ABS(ai) + ABS(bi) + ABS(bo))
-#define ABS2 (unsigned)(ABS(*best_a) + ABS(*best_b))
-
-// Select best element from A and rotate B to insert it
 
 /*
 ** New plan:
@@ -71,40 +62,42 @@ static int	sim(t_stack *a, int o, int n)
 ** 2. Sort into A
 */
 
+#define CUR B[(bi < 0) ? ~bi : (b->len - 1) - bi]
+#define NEW (unsigned)(ABS(o + i) + ABS(bi))
+#define OLD (unsigned)(ABS(*best_a) + ABS(*best_b))
+
 static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 {
 	int		i;
 	int		o;
 	int		bi;
 
-	ai = 0;
-	ao = 0;
+	i = 0;
+	o = 0;
 	bi = 0;
 	*best_a = INT_MAX;
 	*best_b = INT_MAX;
 
-	// 1
+	// 1. Anchor the "zero" offset to the smallest number in A.
 	while (A[o] != a->min)
 		o += 1;
+	o = OPT(o, a);
 
-	// 2
-	while (ABS[bi] < H2(b->len))
+	// 2. Attempt all sorts into A.
+	while (ABS(bi) < H2(b->len))
 	{
-		i = sim
-	}
+		// 2a. Find the correct place to move B[bi] to A.
+		i = sim(a, o, CUR);
 
-	ft_eprintf("\e[93mbest\e[0m\n");
-	while (ABS(ai) < H2(a->len))
-	{
-		bi = sim(CUR, b, bo);
-		ft_eprintf("a[%4i] -> b[%4i]\n", ai, bi);
-		if (ABS1 < ABS2)
+		// 2b. If needed, update the "best move".
+		if (NEW < OLD)
 		{
-			ft_eprintf("\e[96m[SET]\e[0m\n");
-			*best_a = ai;
-			*best_b = bi + bo;
+			*best_a = i + o;
+			*best_b = bi;
 		}
-		ai = -ai + (ai <= 0);
+
+		// 2c. Stagger: 0, 1, -1, 2, -2, ...
+		bi = -bi + (bi <= 0);
 	}
 }
 
