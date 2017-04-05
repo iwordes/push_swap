@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:00:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 15:51:10 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 16:20:49 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 
 #define OP(O) op__(#O, op_##O, a, b)
 
-// v Causing issues? Massive opcount jumps?
-#define OPT(UI, S) (UI > H2(S->len) ? S->len - 1 - UI : UI)
+#define OPM(K) (K % a->len)
+#define OPT(K) OPM(K) - ((OPM(K) > a->len / 2) ? a->len : 0)
+
+
 #define I (a->len - 1 - ((o + i) % a->len))
 
 static int	sim(t_stack *a, int o, int n)
@@ -32,11 +34,10 @@ static int	sim(t_stack *a, int o, int n)
 	while (i < a->len && n > A[I])
 		i += 1;
 	return (i);
-	//return (OPT(i, a));
 }
 
 #define CUR B[(bi < 0) ? ~bi : (b->len - 1) - bi]
-#define NEW (unsigned)(ABS(o + i) + ABS(bi))
+#define NEW (unsigned)(ABS(OPT(o + i)) + ABS(bi))
 #define OLD (unsigned)(ABS(*best_a) + ABS(*best_b))
 
 static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
@@ -54,7 +55,6 @@ static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 	// 1. Anchor the "zero" offset to the smallest number in A.
 	while (A[a->len - 1 - o] != a->min)
 		o += 1;
-	//o = OPT(o, a);
 
 	// 2. Attempt all sorts into A.
 	while (ABS(bi) < H2(b->len))
@@ -65,7 +65,7 @@ static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 		// 2b. If needed, update the "best move".
 		if (NEW < OLD)
 		{
-			*best_a = i + o;
+			*best_a = OPT(o + i);
 			*best_b = bi;
 		}
 
@@ -89,6 +89,13 @@ void		sort(t_stack *a, t_stack *b)
 	{
 		// 2a. Find the most effective move from B to A
 		best(a, b, &best_a, &best_b);
+
+		///
+		ft_eprintf("\e[92mb[%4d] -> a[%4d]\e[0m\n", best_b, best_a);
+		//ft_eprintf("  a->len: %d\n", a->len);
+		//ft_eprintf("  %d %% %d: %d\n", best_a, a->len, best_a % a->len);
+		//ft_eprintf("  OPT(%d): %d\n", best_a, OPT(best_a));
+		///
 
 		// 2b. Select A[best_a]
 		op__srot(a, best_a, 'a');
