@@ -6,58 +6,71 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 13:37:16 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 17:34:34 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-// Invert, ((offset), cap)
-#define I (b->len - 1 - ((bo + i) % b->len))
+#define A a->arr
+#define B b->arr
 
-#define OPT(UI, S) (UI > H2(S->len) ? UI - S->len : UI)
-#define CUR A[(ai < 0) ? ~ai : (a->len - 1) - ai]
-#define ABS1 (unsigned)(ABS(ai) + ABS(bi) + ABS(bo))
-#define ABS2 (unsigned)(ABS(*best_a) + ABS(*best_b))
+#define A1 A[a->len - 1]
+#define A2 A[a->len - 2]
 
-/*
-** The goal of sim() and best() is to determine WHERE to insert TA into B
-** and HOW to insert it there.
-*/
+#define OP(O) op__(#O, op_##O, a, b)
 
-static int	sim(int a, t_stack *b, int bo)
+#define OPM(K) (K % a->len)
+#define OPT(K) OPM(K) - ((OPM(K) > a->len / 2) ? a->len : 0)
+
+
+#define I (a->len - 1 - ((o + i) % a->len))
+
+static int	sim(t_stack *a, int o, int n)
 {
 	int		i;
 
 	i = 0;
-	while (i < b->len && a < B[I])
+	while (i < a->len && n > A[I])
 		i += 1;
-	return (OPT(i));
+	return (i);
 }
+
+#define CUR B[(bi < 0) ? ~bi : (b->len - 1) - bi]
+#define NEW (unsigned)(ABS(OPT(o + i)) + ABS(bi))
+#define OLD (unsigned)(ABS(*best_a) + ABS(*best_b))
 
 static void	best(t_stack *a, t_stack *b, int *best_a, int *best_b)
 {
-	int		ai;
+	int		i;
+	int		o;
 	int		bi;
-	int		bo;
 
-	ai = 0;
+	i = 0;
+	o = 0;
 	bi = 0;
-	bo = 0;
 	*best_a = INT_MAX;
 	*best_b = INT_MAX;
-	while (B[bo] != b->min)
-		bo += 1;
-	while (ABS(ai) < H2(a->len))
+
+	// 1. Anchor the "zero" offset to the smallest number in A.
+	while (A[a->len - 1 - o] != a->min)
+		o += 1;
+
+	// 2. Attempt all sorts into A.
+	while (ABS(bi) < H2(b->len))
 	{
-		bi = sim(CUR, b, bo);
-		if (ABS1 < ABS2)
+		// 2a. Find the correct place to move B[bi] to A.
+		i = sim(a, o, CUR);
+
+		// 2b. If needed, update the "best move".
+		if (NEW < OLD)
 		{
-			//ft_eprintf("\e[96m[SET]\e[0m\n");
-			*best_a = ai;
-			*best_b = bi + bo;
+			*best_a = OPT(o + i);
+			*best_b = bi;
 		}
-		ai = -ai + (ai <= 0);
+
+		// 2c. Stagger: 0, 1, -1, 2, -2, ...
+		bi = -bi + (bi <= 0);
 	}
 }
 
@@ -67,22 +80,29 @@ void		sort1(t_stack *a, t_stack *b)
 	int		best_b;
 	int		o;
 
-	OP(pb);
-	OP(pb);
-	if (B1 < B2)
-		OP(sb);
-	while (a->len)
+	// 1. Push into B.
+	while (a->len > 2)
+		OP(pb);
+
+	// 2. Sort into A.
+	while (b->len)
 	{
+		// 2a. Find the most effective move from B to A
 		best(a, b, &best_a, &best_b);
 
+		// 2b. Select A[best_a]
 		op__srot(a, best_a, 'a');
+
+		// 2c. Select B[best_b]
 		op__srot(b, best_b, 'b');
-		// op__goto(a, best_a);
-		// op__goto(b, best_b);
-		OP(pb);
-	}
-	while (b->len)
+
+		// 2d. Move B[] -> A[]
 		OP(pa);
+	}
+
+	// 3. Find the offset for sorted-A (if any)
 	o = check_ps(a);
+
+	// 4. Eliminate that offset.
 	op__srot(a, o, 'a');
 }

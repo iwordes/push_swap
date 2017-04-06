@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 19:30:21 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/05 17:41:21 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ typedef struct	s_stack
 }				t_stack;
 
 void			init(t_stack *a, t_stack *b, int argc, char **argv);
-void			sort(t_stack *a, t_stack *b);
 void			show(t_stack *a, t_stack *b);
 bool			check(t_stack *a, t_stack *b);
 int				check_ps(t_stack *a);
+
+void			sort1(t_stack *a, t_stack *b);
+void			sort2(t_stack *a, t_stack *b);
+void			merge(t_stack *a, t_stack *b);
 
 void			stk_cpy(t_stack *dest, t_stack *src);
 void			minmax(t_stack *s);
