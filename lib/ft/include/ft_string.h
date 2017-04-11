@@ -91,6 +91,7 @@ size_t	ft_vstrlen_(const char *str1, va_list args);
 int		ft_atoi(const char *string);
 char	*ft_itoa(intmax_t integer);
 char	*ft_itoa_base(intmax_t integer, char base);
+UINT	ft_atou(const char *str);
 
 /*
 ** Character Checks

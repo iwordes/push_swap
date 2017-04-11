@@ -12,7 +12,7 @@
 
 #include <ft_printf.h>
 
-size_t	invis_len(const char *str)
+size_t		invis_len(const char *str)
 {
 	size_t	l;
 
@@ -47,7 +47,7 @@ static void	invis_cpy(char *dest, const char *src)
 	dest[i] = 0;
 }
 
-ssize_t	ft_asprintf_conv_invis(char **string, va_list arg, t_printer *p)
+ssize_t		ft_asprintf_conv_invis(char **string, va_list arg, t_printer *p)
 {
 	char	*raw;
 	size_t	l;
