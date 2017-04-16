@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/16 14:31:57 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 14:48:32 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,7 @@ int			main(int argc, char **argv)
 	g_mn.ops = 0;
 	g_mn.show_ops = 0;
 	g_mn.show_vis = 0;
-
-	ft_printf("  \e[95m%s\e[0m\n", argv[0]);
-
 	arg_parse(&argc, &argv, g_arg);
-
-	ft_printf("  \e[95m%s\e[0m\n", argv[0]);
-
 	init(&a, &b, argc, argv);
 	if (g_mn.show_vis)
 		show(&a, &b, "");
