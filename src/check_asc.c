@@ -6,14 +6,14 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/15 20:06:25 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/15 20:17:39 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 11:35:37 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
 #define S s->arr
-#define I (s->len - 1 - ((o + 1) % s->len))
+#define I (s->len - 1 - ((o + i) % s->len))
 
 int		check_asc(t_stack *s)
 {
