@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/15 20:22:07 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/15 20:42:02 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 #define OP(O) op__(#O, op_##O, a, b)
 
-#define OPM(K) (K % a->len)
-#define OPT(K) OPM(K) - ((OPM(K) > a->len / 2) ? a->len : 0)
+#define OPM(K) (K % b->len)
+#define OPT(K) OPM(K) - ((OPM(K) > b->len / 2) ? b->len : 0)
 
 
 #define I (b->len - 1 - ((o + i) % b->len))
@@ -35,8 +35,10 @@ static int	cost(t_stack *b, int o, int n)
 	int		i;
 
 	i = 0;
-	while (i < b->len && n > B[I])
+	ft_printf("cost:\n  o: %d\n  n: %d\n", o, n);
+	while (i < b->len && n < B[I])
 		i += 1;
+	ft_printf("  i: %d\n", i);
 	return (i);
 }
 
@@ -44,7 +46,7 @@ static int	cost(t_stack *b, int o, int n)
 ** Determine the best sort from A -> B.
 */
 
-#define CUR B[(bi < 0) ? ~bi : (b->len - 1) - bi]
+#define CUR A[(ai < 0) ? ~ai : (a->len - 1) - ai]
 #define NEW (unsigned)(ABS(ai) + ABS(OPT(bo + bi)))
 #define OLD (unsigned)(ABS(*ra) + ABS(*rb))
 
@@ -64,26 +66,31 @@ static void	best(t_stack *a, t_stack *b, int *ra, int *rb)
 	while (B[b->len - 1 - bo] != b->max)
 		bo += 1;
 
-	ft_eprintf("bo: %d\n", bo);
-
 	// 2. Simulate all sorts into B.
 	while (ABS(ai) < H2(a->len))
 	{
-		// 2a. Find the cost to move A[ai] -> B.
+		// 2a. Find the best place in B to move A[ai]
 		bi = cost(b, bo, CUR);
+
+		ft_printf("\e[95mbest\e[0m\n  ai: %d\n  bi: %d\n", ai, bi);
+		ft_printf("  bo: %d\n", bo);
 
 		// 2b. Update the best move.
 		if (NEW < OLD)
 		{
+			ft_printf("  bo + bi: %d\n", bo + bi);
+
 			*ra = ai;
 			*rb = OPT(bo + bi);
+			ft_printf("  ra: %d\n  rb: %d\n", *ra, *rb);
 		}
 
 		ai = -ai + (ai <= 0);
 	}
+
+	if (*ra == INT_MAX || *rb == INT_MAX)
+		exit(42);
 }
-
-
 
 void		sort(t_stack *a, t_stack *b)
 {
@@ -94,24 +101,17 @@ void		sort(t_stack *a, t_stack *b)
 	OP(pb);
 	OP(pb);
 
-	ft_eprintf("a: int[%d]\n", a->len);
-	ft_eprintf("b: int[%d]\n", b->len);
-
 	show(a, b);
 
 	// 2. A ~> B
-	while (a->len/* > 2*/)
+	while (a->len)
 	{
-		// 1a. Find the most effective move from A to B.
 		best(a, b, &rot1, &rot2);
 
-		ft_eprintf("\e[93mloop\e[0m\n  rot1: %d\n  rot2: %d\n", a->len, rot1, rot2);
+		ft_eprintf("\e[93mloop\e[0m\n  rot1: %d\n  rot2: %d\n", rot1, rot2);
 
-		// 1b. Rotate A & B.
 		op__srot(a, rot1, 'a');
 		op__srot(b, rot2, 'b');
-
-		// 1c. Push -> B.
 		OP(pb);
 	}
 

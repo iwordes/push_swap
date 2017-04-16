@@ -6,20 +6,13 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/15 20:21:31 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/15 20:23:24 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
 #ifndef CHECKER
-
-/*
-** 1. Sort half to B.
-** 2. Push half to B.
-** 3. Sort half to A.
-** 4. Merge into A.
-*/
 
 int		main(int argc, char **argv)
 {
