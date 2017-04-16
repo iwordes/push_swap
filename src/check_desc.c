@@ -1,51 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_ps.c                                         :+:      :+:    :+:   */
+/*   check_desc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 14:13:07 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 15:30:09 by iwordes          ###   ########.fr       */
+/*   Created: 2017/04/15 20:05:01 by iwordes           #+#    #+#             */
+/*   Updated: 2017/04/15 20:17:45 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-#define S s.arr
-#define S1 S[s.len - 1]
-#define S2 S[s.len - 2]
+#define S s->arr
+#define I (s->len - 1 - ((o + 1) % s->len))
 
-/*
-** Checks if stack A is sorted (and if so, notes the sort offset)
-*/
-
-int		check_ps(t_stack *a)
+int		check_desc(t_stack *s)
 {
-	t_stack	s;
 	int		i;
 	int		o;
 
-	o = 0;
-	stk_cpy(&s, a);
-	while (S1 <= S2 && o < a->len)
-	{
-		op__rot(&s);
-		o += 1;
-	}
-	op__rot(&s);
-	o += 1;
-	if (o >= s.len)
-		o %= s.len;
-	if (o >= H2(s.len))
-		o -= s.len;
 	i = 0;
-	while (i + 1 < s.len)
+	o = 0;
+	while (S[I] != s->max)
+		o += 1;
+	while (i + 1 < s->len)
 	{
-		if (S[i] < S[i + 1])
-			break ;
+		if (S[I] < S[I + 1])
+			return (INT_MIN);
 		i += 1;
 	}
-	free(s.arr);
-	return ((i + 1 == s.len) ? o : INT_MIN);
+	return (o);
 }

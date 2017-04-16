@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/15 19:19:25 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/15 20:22:07 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	cost(t_stack *b, int o, int n)
 	int		i;
 
 	i = 0;
-	while (i < b->len && B[I] >= n)
+	while (i < b->len && n > B[I])
 		i += 1;
 	return (i);
 }
@@ -61,8 +61,10 @@ static void	best(t_stack *a, t_stack *b, int *ra, int *rb)
 	*rb = INT_MAX;
 
 	// 1. Find the start of B.
-	while (B[b->len - 1 - bo] != b->min)
+	while (B[b->len - 1 - bo] != b->max)
 		bo += 1;
+
+	ft_eprintf("bo: %d\n", bo);
 
 	// 2. Simulate all sorts into B.
 	while (ABS(ai) < H2(a->len))
@@ -81,14 +83,21 @@ static void	best(t_stack *a, t_stack *b, int *ra, int *rb)
 	}
 }
 
+
+
 void		sort(t_stack *a, t_stack *b)
 {
 	int		rot1;
 	int		rot2;
 
 	// 1. A -> B
-	op_pb(a, b);
-	op_pb(a, b);
+	OP(pb);
+	OP(pb);
+
+	ft_eprintf("a: int[%d]\n", a->len);
+	ft_eprintf("b: int[%d]\n", b->len);
+
+	show(a, b);
 
 	// 2. A ~> B
 	while (a->len/* > 2*/)
@@ -96,18 +105,20 @@ void		sort(t_stack *a, t_stack *b)
 		// 1a. Find the most effective move from A to B.
 		best(a, b, &rot1, &rot2);
 
+		ft_eprintf("\e[93mloop\e[0m\n  rot1: %d\n  rot2: %d\n", a->len, rot1, rot2);
+
 		// 1b. Rotate A & B.
 		op__srot(a, rot1, 'a');
 		op__srot(b, rot2, 'b');
 
 		// 1c. Push -> B.
-		op_pb(a, b);
+		OP(pb);
 	}
 
 	// 2. B -> A
 	while (b->len)
-		op_pa(a, b);
+		OP(pa);
 
 	// 3. Align A
-	op__srot(a, check_ps(a), 'a');
+	op__srot(a, check_asc(a), 'a');
 }

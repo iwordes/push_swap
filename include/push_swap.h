@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/15 19:18:58 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/15 20:21:56 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,20 @@ typedef struct	s_stack
 	int			len;
 }				t_stack;
 
+typedef struct	s_op
+{
+	char		*str;
+	void		(*fn)(t_stack*, t_stack*);
+}				t_op;
+
 void			init(t_stack *a, t_stack *b, int argc, char **argv);
 void			show(t_stack *a, t_stack *b);
-bool			check(t_stack *a, t_stack *b);
-int				check_ps(t_stack *a);
+
+int				check_asc(t_stack *s);
+int				check_desc(t_stack *s);
 
 void			sort(t_stack *a, t_stack *b);
 
-void			stk_cpy(t_stack *dest, t_stack *src);
 void			minmax(t_stack *s);
 
 void			error(void);

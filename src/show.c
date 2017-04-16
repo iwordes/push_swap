@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 17:38:15 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 18:39:54 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/15 19:36:47 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	show(t_stack *a, t_stack *b)
 {
 	int		i;
 
+	ft_putstr("  v top\n");
 	ft_putstr("\e[91mA[");
 	i = 0;
 	while (i < a->len)
