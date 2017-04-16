@@ -65,6 +65,7 @@ static void		short_(int *argc, char ***argv, t_arg *args)
 			((T_ARG1)arg->fn)(*(ARGV += 1));
 			break ;
 		}
+		i += 1;
 	}
 }
 
