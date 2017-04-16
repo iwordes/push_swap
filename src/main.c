@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/05 17:41:03 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/15 19:18:50 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,8 @@ int			main(int argc, char **argv)
 	t_stack	b;
 
 	init(&a, &b, argc, argv);
-	if (a.len > 1)
-	{
-		sort1(&a, &b);
-		//sort2(&a, &b);
-		//merge(&a, &b);
-	}
+	if (a.len > 1 && check_ps(&a) != 0)
+		sort(&a, &b);
 	free(a.arr);
 	free(b.arr);
 	return (0);
