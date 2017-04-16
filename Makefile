@@ -6,7 +6,7 @@
 #    By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 19:45:22 by iwordes           #+#    #+#              #
-#    Updated: 2017/04/15 20:19:21 by iwordes          ###   ########.fr        #
+#    Updated: 2017/04/16 13:59:09 by iwordes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,12 @@ AUTHOR = iwordes
 
 CC     = gcc
 CF    += -Wall -Wextra -Werror -I include
-CF    += -L lib/ft -l ft -I lib/ft/include
+CF    += -L lib/ft -lft -I lib/ft/include
+CF    += -L lib/arg -larg -I lib/arg
 
 SRC_OP = pa.c pb.c ra.c rb.c rr.c rra.c rrb.c rrr.c sa.c sb.c ss.c _.c _rot.c _rrot.c _swap.c _srot.c
 SRC    = check_asc.c check_desc.c error.c init.c main.c minmax.c show.c sort.c
+SRC   += arg/cnt.c arg/vis.c
 SRC   += $(addprefix op/,$(SRC_OP))
 SRC   := $(addprefix src/,$(SRC))
 
@@ -51,7 +53,7 @@ test:
 $(NAME): $(SRC) lib/ft/libft.a
 	$(CC) $(CF) -o $@ $^
 
-checker: $(SRC) lib/ft/libft.a
+checker: $(SRC) lib/ft/libft.a lib/arg/libarg.a
 	$(CC) $(CF) -D CHECKER -o $@ $^
 
 lib/ft/libft.a:

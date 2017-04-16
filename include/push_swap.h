@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/15 20:21:56 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 13:46:25 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PUSH_SWAP_H
 
 # include <limits.h>
+
+# include <libarg.h>
 # include <libft.h>
 
 # define MGUARD(MEM) if ((MEM) == NULL) exit(12)
@@ -33,8 +35,20 @@ typedef struct	s_op
 	void		(*fn)(t_stack*, t_stack*);
 }				t_op;
 
+typedef struct	s_main
+{
+	unsigned	ops;
+	int			show_ops;
+	int			show_vis;
+}				t_main;
+
+t_main			g_mn;
+
+void			arg_cnt(void);
+void			arg_vis(void);
+
 void			init(t_stack *a, t_stack *b, int argc, char **argv);
-void			show(t_stack *a, t_stack *b);
+void			show(t_stack *a, t_stack *b, const char *op);
 
 int				check_asc(t_stack *s);
 int				check_desc(t_stack *s);

@@ -6,57 +6,65 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:11:17 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 19:33:48 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 14:33:18 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-#define ISDIG(C) (C >= '0' && C <= '9')
+#define A a->arr
 
-static bool	val_num(char *num)
+static void	validate(t_stack *a, long n)
 {
-	while (ft_isspace(*num))
-		num += 1;
-	if (*num == '+' || *num == '-')
-		num += 1;
-	while (ISDIG(*num) && *num != 0)
-		num += 1;
-	return (*num == 0 || ft_isspace(*num));
+	int		i;
+
+	i = 0;
+	if (n < INT_MIN || n > INT_MAX)
+		error();
+	while (i < a->len)
+	{
+		if (n == A[i])
+			error();
+		i += 1;
+	}
 }
 
-void		init_(t_stack *a, t_stack *b, int argc)
+static void	init_stack(t_stack *a, int argc, char **argv)
 {
-	b->len = 0;
-	a->len = argc - 1;
-	a->min = INT_MAX;
-	b->min = INT_MAX;
-	a->max = INT_MIN;
-	b->max = INT_MIN;
-	MGUARD(a->arr = MALT(int, argc - 1));
-	MGUARD(b->arr = MALT(int, argc - 1));
+	long	n;
+
+	while (argc)
+	{
+		ITER(*argv, ft_isspace(**argv));
+		n = ft_atol(*argv);
+		if (**argv == '+' || **argv == '-')
+			*argv += 1;
+		if (n == 0 && **argv != '0')
+			error();
+		validate(a, n);
+		A[a->len++] = n;
+		(n < a->min) && (a->min = n);
+		(n > a->max) && (a->max = n);
+		ITER(*argv, ft_isdigit(**argv));
+		if (**argv != 0)
+			error();
+		argc -= 1;
+		argv += 1;
+	}
 }
 
 void		init(t_stack *a, t_stack *b, int argc, char **argv)
 {
-	int		i;
-	long	n;
-
-	i = 1;
-	init_(a, b, argc);
-	while (i < argc)
-	{
-		if (!val_num(argv[i]))
-			error();
-		//        v l
-		n = ft_atoi(argv[i]);
-		if (n > INT_MAX)
-			error();
-		a->arr[a->len - i] = n;
-		(n < a->min) && (a->min = n);
-		(n > a->max) && (a->max = n);
-		i += 1;
-	}
-	if (i == 1)
+	a->len = 0;
+	b->len = 0;
+	a->max = INT_MIN;
+	b->max = INT_MIN;
+	a->min = INT_MAX;
+	b->min = INT_MAX;
+	MGUARD(a->arr = MALT(int, argc));
+	MGUARD(b->arr = MALT(int, argc));
+	if (argc == 0)
 		error();
+	else
+		init_stack(a, argc, argv);
 }

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/15 20:42:02 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 12:49:53 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static int	cost(t_stack *b, int o, int n)
 	int		i;
 
 	i = 0;
-	ft_printf("cost:\n  o: %d\n  n: %d\n", o, n);
+	//ft_printf("cost:\n  o: %d\n  n: %d\n", o, n);
 	while (i < b->len && n < B[I])
 		i += 1;
-	ft_printf("  i: %d\n", i);
+	//ft_printf("  i: %d\n", i);
 	return (i);
 }
 
@@ -72,17 +72,17 @@ static void	best(t_stack *a, t_stack *b, int *ra, int *rb)
 		// 2a. Find the best place in B to move A[ai]
 		bi = cost(b, bo, CUR);
 
-		ft_printf("\e[95mbest\e[0m\n  ai: %d\n  bi: %d\n", ai, bi);
-		ft_printf("  bo: %d\n", bo);
+		//ft_printf("\e[95mbest\e[0m\n  ai: %d\n  bi: %d\n", ai, bi);
+		//ft_printf("  bo: %d\n", bo);
 
 		// 2b. Update the best move.
 		if (NEW < OLD)
 		{
-			ft_printf("  bo + bi: %d\n", bo + bi);
+			//ft_printf("  bo + bi: %d\n", bo + bi);
 
 			*ra = ai;
 			*rb = OPT(bo + bi);
-			ft_printf("  ra: %d\n  rb: %d\n", *ra, *rb);
+			//ft_printf("  ra: %d\n  rb: %d\n", *ra, *rb);
 		}
 
 		ai = -ai + (ai <= 0);
@@ -101,15 +101,15 @@ void		sort(t_stack *a, t_stack *b)
 	OP(pb);
 	OP(pb);
 
-	show(a, b);
+	/*
+	if (B[0] > B[1])
+		OP(sb);
+	*/
 
 	// 2. A ~> B
-	while (a->len)
+	while (a->len/* > 1*/)
 	{
 		best(a, b, &rot1, &rot2);
-
-		ft_eprintf("\e[93mloop\e[0m\n  rot1: %d\n  rot2: %d\n", rot1, rot2);
-
 		op__srot(a, rot1, 'a');
 		op__srot(b, rot2, 'b');
 		OP(pb);

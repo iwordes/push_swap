@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/15 20:23:24 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 14:31:57 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		main(int argc, char **argv)
 	t_stack	a;
 	t_stack	b;
 
+	argc -= 1;
+	argv += 1;
 	init(&a, &b, argc, argv);
 	if (check_asc(&a) != 0)
 		sort(&a, &b);
@@ -29,7 +31,7 @@ int		main(int argc, char **argv)
 
 #else
 
-t_op	g_op[] =
+static t_op	g_op[] =
 {
 	{ "pa", op_pa },
 	{ "pb", op_pb },
@@ -45,46 +47,63 @@ t_op	g_op[] =
 	{ NULL, NULL }
 };
 
-int		main(int argc, char **argv)
+t_main	g_mn;
+
+static void	do_op(t_stack *a, t_stack *b, char *op)
+{
+	unsigned	i;
+
+	i = ~0;
+	while (g_op[i += 1].str != NULL)
+		if (ft_strequ(g_op[i].str, op))
+		{
+			g_op[i].fn(a, b);
+			if (g_mn.show_vis)
+				show(a, b, op);
+			break ;
+		}
+	free(op);
+	if (g_op[i].str == NULL)
+		error();
+	g_mn.ops += 1;
+}
+
+static t_arg	g_arg[] =
+{
+	{ "c", arg_cnt, 0 },
+	{ "v", arg_vis, 0 },
+	//{ "w", arg_wait, 0 },
+	{ NULL, NULL, 0 }
+};
+
+int			main(int argc, char **argv)
 {
 	char	*op;
-	size_t	i;
 	t_stack	a;
 	t_stack	b;
 
+	g_mn.ops = 0;
+	g_mn.show_ops = 0;
+	g_mn.show_vis = 0;
+
+	ft_printf("  \e[95m%s\e[0m\n", argv[0]);
+
+	arg_parse(&argc, &argv, g_arg);
+
+	ft_printf("  \e[95m%s\e[0m\n", argv[0]);
+
 	init(&a, &b, argc, argv);
-	show(&a, &b);
-
-	unsigned	c = 0;
-
+	if (g_mn.show_vis)
+		show(&a, &b, "");
 	while (ft_readln(0, &op) > 0)
-	{
-		i = ~0;
-		while (g_op[i += 1].str != NULL)
-			if (ft_strequ(g_op[i].str, op))
-			{
-				g_op[i].fn(&a, &b);
-				if (argc < 100)
-				{
-					ft_putendl(op);
-					show(&a, &b);
-				}
-				break ;
-			}
-		free(op);
-		if (g_op[i].str == NULL)
-			error();
-
-		c += 1;
-	}
+		do_op(&a, &b, op);
 	free(op);
-
-	if (check_asc(&a) && b.len == 0)
+	if (check_asc(&a) == 0 && b.len == 0)
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
-
-	ft_eprintf("%u ops\n", c);
+	if (g_mn.show_ops)
+		ft_printf("%u\n", g_mn.ops);
 	free(a.arr);
 	free(b.arr);
 	return (0);
