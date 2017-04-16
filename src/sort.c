@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/16 12:49:53 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 14:55:02 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,10 @@ void		sort(t_stack *a, t_stack *b)
 	while (b->len)
 		OP(pa);
 
+	int tmp = check_asc(a);
+
+	ft_eprintf("  tmp: %d\n", tmp);
+
 	// 3. Align A
-	op__srot(a, check_asc(a), 'a');
+	op__srot(a, tmp, 'a');
 }

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 17:38:15 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/16 13:46:19 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 14:51:13 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,3 @@ void	show(t_stack *a, t_stack *b, const char *op)
 	ft_putstr("| \e[1;4;91mA\e[0m | \e[1;4;96mB\e[0m |\n");
 	showop(op);
 }
-/*
-{
-	int		i;
-
-	ft_putstr("\e[91mA[");
-	i = 0;
-	while (i < a->len)
-	{
-		ft_printf("%s%d", (i > 0) ? ", " : "", A);
-		i += 1;
-	}
-	ft_putstr("]\n");
-	ft_putstr("\e[94mB[");
-	i = 0;
-	while (i < b->len)
-	{
-		ft_printf("%s%d", (i > 0) ? ", " : "", B);
-		i += 1;
-	}
-	ft_putstr("]\e[0m\n\n");
-}
-*/

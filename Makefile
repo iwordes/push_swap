@@ -45,7 +45,7 @@ re: fclean all
 .PHONY: test
 test:
 	make
-	n=`echo $$(~/test/rand $N)` sh -c './push_swap $$n | ./checker $$n'
+	n=`echo $$(~/test/rand $N)` sh -c './push_swap $$n | ./checker -cv $$n'
 
 # ------------------------------------------------------------------------------
 # Real Targets
