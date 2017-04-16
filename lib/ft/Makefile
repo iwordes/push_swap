@@ -13,7 +13,8 @@ CF      := -Wall -Wextra -Werror -I $(INCDIR)
 FN_MEMORY := ft_bzero ft_drealloc ft_memalloc ft_memccpy ft_memchr ft_memcmp\
 			 ft_memcpy ft_memdel ft_memmove ft_memset ft_memuntil ft_realloc
 
-FN_STRING := ft_atoi     ft_charcnt   ft_charrcnt\
+FN_STRING := ft_atou\
+			 ft_atoi     ft_charcnt   ft_charrcnt\
 			 ft_itoa     ft_itoa_base ft_strcap\
 			 ft_strcat   ft_strchr    ft_strclr\
 			 ft_strcmp   ft_strcpy    ft_strctrim\

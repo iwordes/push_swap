@@ -12,26 +12,14 @@
 
 #include <libft.h>
 
-/*
-** ft_realloc Mk.I
-** ==========
-** A completely inefficient function that takes a void pointer, allocates a new
-** buffer of the target size, then copies from the old location in memory to the
-** new one, returning the copy after freeing the original pointer.
-** + Should allocation fail, the function will return without any harm done.
-*/
-
-void		*ft_realloc(void *original, size_t target, size_t orig_size)
+void		*ft_realloc(void *mem, size_t tgt, size_t orig)
 {
 	void	*copy;
 
-	if (target == orig_size)
-		return (original);
-	NULL_GUARD(copy = (t_byte*)malloc(target));
-	if (original != NULL && copy != NULL)
-	{
-		ft_memcpy(copy, original, ft_lesser(target, orig_size));
-		free(original);
-	}
+	if (tgt == orig)
+		return (mem);
+	NULL_GUARD(copy = malloc(tgt));
+	if (mem != NULL && copy != NULL)
+		ft_memcpy(copy, mem, ft_lesser(tgt, orig));
 	return (copy);
 }

@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atou.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/11 11:09:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/11 11:09:38 by iwordes          ###   ########.fr       */
+/*   Created: 2017/04/16 13:25:15 by iwordes           #+#    #+#             */
+/*   Updated: 2017/04/16 13:25:16 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-
-unsigned	ft_atou(const char *str)
+long	ft_atol(const char *str)
 {
-	unsigned	n;
+	int		sign;
+	long	n;
 
 	n = 0;
+	sign = 1;
 	ITER(str, ft_isspace(*str));
+	if (*str == '-')
+		sign = -1;
+	if (*str == '-' || *str == '+')
+		str += 1;
 	while (ft_isdigit(*str))
 	{
 		n = (n * 10) + (*str - '0');
 		str += 1;
 	}
-	return (n);
+	return (n * sign);
 }
