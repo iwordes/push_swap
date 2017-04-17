@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/17 14:19:36 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/17 15:01:36 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ static void	best(t_stack *a, t_stack *b, int *best_ra, int *best_rb)
 	rb = 0;
 	*best_ra = INT_MAX;
 	*best_rb = INT_MAX;
-
 	while (B[-o] != b->max)
 		o += 1;
-
 	while (ra < a->len)
 	{
 		rb = cost(b, o, A[-ra]);
@@ -62,11 +60,7 @@ static void	best(t_stack *a, t_stack *b, int *best_ra, int *best_rb)
 	}
 }
 
-/*
-** A ~> B
-*/
-
-void	sort1(t_stack *a, t_stack *b)
+void		sort1(t_stack *a, t_stack *b)
 {
 	int		ra;
 	int		rb;
@@ -74,16 +68,11 @@ void	sort1(t_stack *a, t_stack *b)
 	OP(pb);
 	OP(pb);
 
-	while (a->len)
+	while (a->len > 2)
 	{
 		best(a, b, &ra, &rb);
 		op__srot(a, ra, 'a');
 		op__srot(b, rb, 'b');
 		OP(pb);
 	}
-
-	///
-	op__srot(b, check_desc(b), 'b');
-	while (b->len)
-		OP(pa);
 }
