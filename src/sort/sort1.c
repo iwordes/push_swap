@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/17 11:47:40 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/17 13:07:10 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	cost(t_stack *b, int o, int n)
 	int		i;
 
 	i = 0;
-	while (i < b->len && n > B[I])
+	while (i < b->len && n < B[I])
 		i += 1;
 	return (i);
 }
@@ -61,7 +61,7 @@ static void	best(t_stack *a, t_stack *b, int *ra, int *rb)
 	*rb = INT_MAX;
 
 	// 1. Find the start of B.
-	while (B[b->len - 1 - bo] != b->min)
+	while (B[b->len - 1 - bo] != b->max)
 		bo += 1;
 
 	// 2. Simulate all sorts into B.
@@ -84,11 +84,15 @@ void		sort1(t_stack *a, t_stack *b)
 
 	OP(pb);
 	OP(pb);
-	while (a->len > 2)
+	while (a->len/* > 2*/)
 	{
 		best(a, b, &rot1, &rot2);
 		op__srot(a, rot1, 'a');
 		op__srot(b, rot2, 'b');
 		OP(pb);
 	}
+
+	op__srot(b, check_desc(b), 'b');
+	while (b->len)
+		OP(pa);
 }
