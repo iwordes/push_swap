@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 17:38:15 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/16 14:51:13 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 17:18:29 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_op	g_op[] =
 	{ "rb", (void*)"\e[F\e[F\e[C\e[C\e[C\e[C\e[C\e[C^\n\n" },
 	{ "rr", (void*)"\e[F\e[F\e[C\e[C^\e[C\e[C\e[C^\n\n" },
 	{ "rra", (void*)"\e[F\e[F\e[C\e[Cv\n\n" },
-	{ "rrb", (void*)"\e[F\e[F\e[C\e[C\e[C\e[C\e[Cv\n\n" },
+	{ "rrb", (void*)"\e[F\e[F\e[C\e[C\e[C\e[C\e[C\e[Cv\n\n" },
 	{ "rrr", (void*)"\e[F\e[F\e[C\e[Cv\e[C\e[C\e[Cv\n\n" },
 	{ "sa", (void*)"\e[F\e[F\e[C\e[C%\n\n" },
 	{ "sb", (void*)"\e[F\e[F\e[C\e[C\e[C\e[C\e[C\e[C%\n\n" },
