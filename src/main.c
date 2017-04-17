@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:47:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/16 14:48:32 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/17 11:09:57 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int		main(int argc, char **argv)
 	argv += 1;
 	init(&a, &b, argc, argv);
 	if (check_asc(&a) != 0)
-		sort(&a, &b);
+	{
+		sort1(&a, &b);
+		//sort2(&a, &b);
+		merge(&a, &b);
+	}
 	free(a.arr);
 	free(b.arr);
 	return (0);

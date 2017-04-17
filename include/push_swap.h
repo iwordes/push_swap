@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/16 13:46:25 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/17 11:00:40 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # define MGUARD(MEM) if ((MEM) == NULL) exit(12)
 # define H2(N) ((N >> 1) + (N & 1))
+
+# define ASSERT(C) if (!(C)) error();
 
 typedef struct	s_stack
 {
@@ -54,6 +56,10 @@ int				check_asc(t_stack *s);
 int				check_desc(t_stack *s);
 
 void			sort(t_stack *a, t_stack *b);
+
+void			sort1(t_stack *a, t_stack *b);
+void			sort2(t_stack *a, t_stack *b);
+void			merge(t_stack *a, t_stack *b);
 
 void			minmax(t_stack *s);
 
