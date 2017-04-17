@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/17 15:01:36 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/17 15:58:39 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,24 @@ static void	best(t_stack *a, t_stack *b, int *best_ra, int *best_rb)
 	}
 }
 
+static void	smarot(t_stack *a, t_stack *b, int ra, int rb)
+{
+	while (ra > 0 && rb > 0)
+	{
+		OP(rr);
+		ra -= 1;
+		rb -= 1;
+	}
+	while (ra < 0 && rb < 0)
+	{
+		OP(rrr);
+		ra += 1;
+		rb += 1;
+	}
+	op__srot(a, ra, 'a');
+	op__srot(b, rb, 'b');
+}
+
 void		sort1(t_stack *a, t_stack *b)
 {
 	int		ra;
@@ -67,12 +85,10 @@ void		sort1(t_stack *a, t_stack *b)
 
 	OP(pb);
 	OP(pb);
-
 	while (a->len > 2)
 	{
 		best(a, b, &ra, &rb);
-		op__srot(a, ra, 'a');
-		op__srot(b, rb, 'b');
+		smarot(a, b, ra, rb);
 		OP(pb);
 	}
 }
