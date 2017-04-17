@@ -6,92 +6,83 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/17 13:07:10 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/17 14:19:36 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-#define A a->arr
-#define B b->arr
-
-#define A1 A[a->len - 1]
-#define A2 A[a->len - 2]
+#define A (a->arr + a->len - 1)
+#define B (b->arr + b->len - 1)
 
 #define OP(O) op__(#O, op_##O, a, b)
 
-#define OPM(K) (K % b->len)
-#define OPT(K) OPM(K) - ((OPM(K) > b->len / 2) ? b->len : 0)
+#define OH2(I, S) ((I % S->len) > S->len / 2)
+#define OPT(I, S) ((I % S->len) - (OH2(I, S) ? S->len : 0))
 
-
-#define I (b->len - 1 - ((o + i) % b->len))
-
-/*
-** Return the cost of sorting the value N into B at offset O.
-*/
+#define I ((o + r) % b->len)
 
 static int	cost(t_stack *b, int o, int n)
 {
-	int		i;
+	int		r;
 
-	i = 0;
-	while (i < b->len && n < B[I])
-		i += 1;
-	return (i);
+	r = 0;
+	while (r < b->len && n < B[-I])
+		r += 1;
+	return (o + r);
+}
+
+#define COST (unsigned)(ABS(OPT(ra, a)) + ABS(OPT(rb, b)))
+#define BEST (unsigned)(ABS(*best_ra) + ABS(*best_rb))
+
+static void	best(t_stack *a, t_stack *b, int *best_ra, int *best_rb)
+{
+	int		ra;
+	int		rb;
+	int		o;
+
+	o = 0;
+	ra = 0;
+	rb = 0;
+	*best_ra = INT_MAX;
+	*best_rb = INT_MAX;
+
+	while (B[-o] != b->max)
+		o += 1;
+
+	while (ra < a->len)
+	{
+		rb = cost(b, o, A[-ra]);
+		if (COST < BEST)
+		{
+			*best_ra = OPT(ra, a);
+			*best_rb = OPT(rb, b);
+		}
+		ra += 1;
+	}
 }
 
 /*
-** Determine the best sort from A -> B.
+** A ~> B
 */
 
-#define CUR A[(ai < 0) ? ~ai : (a->len - 1) - ai]
-#define NEW (unsigned)(ABS(ai) + ABS(OPT(bo + bi)))
-#define OLD (unsigned)(ABS(*ra) + ABS(*rb))
-
-static void	best(t_stack *a, t_stack *b, int *ra, int *rb)
+void	sort1(t_stack *a, t_stack *b)
 {
-	int		ai;
-	int		bi;
-	int		bo;
-
-	ai = 0;
-	bi = 0;
-	bo = 0;
-	*ra = INT_MAX;
-	*rb = INT_MAX;
-
-	// 1. Find the start of B.
-	while (B[b->len - 1 - bo] != b->max)
-		bo += 1;
-
-	// 2. Simulate all sorts into B.
-	while (ABS(ai) <= H2(a->len))
-	{
-		bi = cost(b, bo, CUR);
-		if (NEW < OLD)
-		{
-			*ra = ai;
-			*rb = OPT(bo + bi);
-		}
-		ai = -ai + (ai <= 0);
-	}
-}
-
-void		sort1(t_stack *a, t_stack *b)
-{
-	int		rot1;
-	int		rot2;
+	int		ra;
+	int		rb;
 
 	OP(pb);
 	OP(pb);
-	while (a->len/* > 2*/)
+
+	while (a->len)
 	{
-		best(a, b, &rot1, &rot2);
-		op__srot(a, rot1, 'a');
-		op__srot(b, rot2, 'b');
+		best(a, b, &ra, &rb);
+		op__srot(a, ra, 'a');
+		op__srot(b, rb, 'b');
 		OP(pb);
 	}
 
+	///
 	op__srot(b, check_desc(b), 'b');
 	while (b->len)
 		OP(pa);
