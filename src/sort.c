@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/16 14:55:02 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/16 17:31:00 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,17 @@ static void	best(t_stack *a, t_stack *b, int *ra, int *rb)
 		bo += 1;
 
 	// 2. Simulate all sorts into B.
-	while (ABS(ai) < H2(a->len))
+	while (ABS(ai) <= H2(a->len))
 	{
-		// 2a. Find the best place in B to move A[ai]
-		bi = cost(b, bo, CUR);
-
-		//ft_printf("\e[95mbest\e[0m\n  ai: %d\n  bi: %d\n", ai, bi);
-		//ft_printf("  bo: %d\n", bo);
-
-		// 2b. Update the best move.
-		if (NEW < OLD)
+		if (CUR != a->max)
 		{
-			//ft_printf("  bo + bi: %d\n", bo + bi);
-
-			*ra = ai;
-			*rb = OPT(bo + bi);
-			//ft_printf("  ra: %d\n  rb: %d\n", *ra, *rb);
+			bi = cost(b, bo, CUR);
+			if (NEW < OLD)
+			{
+				*ra = ai;
+				*rb = OPT(bo + bi);
+			}
 		}
-
 		ai = -ai + (ai <= 0);
 	}
 
@@ -97,17 +90,14 @@ void		sort(t_stack *a, t_stack *b)
 	int		rot1;
 	int		rot2;
 
-	// 1. A -> B
+	if (A1 == a->max)
+		OP(ra);
 	OP(pb);
+	if (A1 == a->max)
+		OP(ra);
 	OP(pb);
 
-	/*
-	if (B[0] > B[1])
-		OP(sb);
-	*/
-
-	// 2. A ~> B
-	while (a->len/* > 1*/)
+	while (a->len != 1)
 	{
 		best(a, b, &rot1, &rot2);
 		op__srot(a, rot1, 'a');
@@ -115,14 +105,8 @@ void		sort(t_stack *a, t_stack *b)
 		OP(pb);
 	}
 
-	// 2. B -> A
+	op__srot(b, check_desc(b), 'b');
+
 	while (b->len)
 		OP(pa);
-
-	int tmp = check_asc(a);
-
-	ft_eprintf("  tmp: %d\n", tmp);
-
-	// 3. Align A
-	op__srot(a, tmp, 'a');
 }
