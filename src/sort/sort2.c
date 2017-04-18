@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 19:45:21 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/17 15:46:43 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/18 10:43:59 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,8 @@ static void	best(t_stack *a, int *rot1, int *rot2)
 	r2 = 0;
 	*rot1 = INT_MAX;
 	*rot2 = INT_MAX;
-
 	while (A[-o] != a->min)
 		o += 1;
-
 	while (r1 < a->len)
 	{
 		r2 = cost(a, o, A[-r1]) - r1;
@@ -72,21 +70,18 @@ static void	best(t_stack *a, int *rot1, int *rot2)
 
 void	sort2(t_stack *a, t_stack *b)
 {
-	int		rot1;
-	int		rot2;
-	int		rot3;
+	int		r1;
+	int		r2;
 
-	if (a->len == 3 && A[0] > A[1])
-		OP(sa);
-	if (a->len <= 3)
+	if (a->len <= 2)
 		return ;
-	while ((rot3 = check_asc(a)) == INT_MIN)
+	while (check_asc(a) == INT_MIN)
 	{
-		best(a, &rot1, &rot2);
-		op__srot(a, rot1, 'a');
+		best(a, &r1, &r2);
+		op__srot(a, r1, 'a');
 		OP(pb);
-		op__srot(a, rot2, 'a');
+		op__srot(a, r2, 'a');
 		OP(pa);
 	}
-	op__srot(a, rot3, 'a');
+	while(1);
 }

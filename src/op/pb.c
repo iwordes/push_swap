@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:40:39 by iwordes           #+#    #+#             */
-/*   Updated: 2017/03/30 19:51:18 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/17 17:23:51 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 void	op_pb(t_stack *a, t_stack *b)
 {
+	if (a->len == 0)
+		return ;
 	B[b->len] = A1;
 	b->len += 1;
 	a->len -= 1;
