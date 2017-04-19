@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/18 10:33:43 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/19 10:29:04 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		sort1(t_stack *a, t_stack *b)
 	int		ra;
 	int		rb;
 
-	left = a->len / 10;
+	left = a->len / 50;
 	OP(pb);
 	OP(pb);
 	while (a->len > left)
