@@ -5,78 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/16 19:45:21 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/18 13:37:55 by iwordes          ###   ########.fr       */
+/*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
+/*   Updated: 2017/04/26 18:47:16 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-/*
-** Sort the remaining elements in A.
-*/
-
 #define A (a->arr + a->len - 1)
-#define N A[-((o + r1) % a->len)]
-#define I ((o + r1 + r2 - 1) % a->len)
-#define OP(O) op__(#O, op_##O, a, b)
+#define B (b->arr + b->len - 1)
 
-static int	back(t_stack *a, int o, int r1)
+#define OH2(I, S) ((I % S->len) > S->len / 2)
+#define OPT(I, S) ((I % S->len) - (OH2(I, S) ? S->len : 0))
+
+#define I ((o + r) % a->len)
+
+static int	cost(t_stack *a, int o, int n)
 {
-	int		r2;
+	int		r;
 
-	r2 = 0;
-	while (r1 + r2 != 0 && N < A[-I])
-		r2 -= 1;
-	return (r2);
+	r = 0;
+	while (r < a->len && n > A[-I])
+		r += 1;
+	return (o + r);
 }
 
-#define AL1 a->len
-#define AL2 (a->len - 1)
-#define OPT1(K) (K % AL1) - (((K % AL1) > AL1 / 2) ? AL1 : 0)
-#define OPT2(K) ((ABS(K) > AL2 / 2) ? K + AL2 : K)
+#define COST (score(OPT(ra, a), OPT(rb, b)))
+#define BEST (score(*best_ra, *best_rb))
 
-#define COST (unsigned)(ABS(OPT1(o + r1)) + ABS(OPT2(r2)))
-#define BEST (unsigned)(ABS(*best_r1) + ABS(*best_r2))
-
-static void	best(t_stack *a, int *best_r1, int *best_r2)
+static void	best(t_stack *a, t_stack *b, int *best_ra, int *best_rb)
 {
-	int		r1;
-	int		r2;
+	int		ra;
+	int		rb;
 	int		o;
 
 	o = 0;
-	r1 = 0;
-	r2 = 0;
-	*best_r1 = INT_MAX;
-	*best_r2 = INT_MAX;
+	ra = 0;
+	rb = 0;
+	*best_ra = INT_MAX;
+	*best_rb = INT_MAX;
 	while (A[-o] != a->min)
 		o += 1;
-	while (r1 < a->len)
+	while (rb < b->len)
 	{
-		r2 = back(a, o, r1);
-		if (r2 != 0 && COST < BEST)
+		ra = cost(a, o, B[-rb]);
+		if (COST < BEST)
 		{
-			*best_r1 = OPT1(o + r1);
-			*best_r2 = OPT2(r2);
+			*best_ra = OPT(ra, a);
+			*best_rb = OPT(rb, b);
 		}
-		r1 += 1;
+		rb += 1;
 	}
 }
 
-void	sort2(t_stack *a, t_stack *b)
+void		sort2(t_stack *a, t_stack *b)
 {
-	int		r1;
-	int		r2;
+	int		ra;
+	int		rb;
 
-	if (a->len <= 2)
-		return ;
-	while (check_asc(a) == INT_MIN)
+	while (b->len)
 	{
-		best(a, &r1, &r2);
-		op__srot(a, r1, 'a');
-		OP(pb);
-		op__srot(a, r2, 'a');
+		best(a, b, &ra, &rb);
+		smarot(a, b, ra, rb);
 		OP(pa);
 	}
+	op__srot(a, check_asc(a), 'a');
 }

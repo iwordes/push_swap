@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_asc.c                                        :+:      :+:    :+:   */
+/*   score.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/15 20:06:25 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/22 20:45:23 by iwordes          ###   ########.fr       */
+/*   Created: 2017/04/26 18:36:33 by iwordes           #+#    #+#             */
+/*   Updated: 2017/04/26 18:58:11 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-#define S (s->arr + s->len - 1)
-#define I1 ((o + i) % s->len)
-#define I2 ((o + i + 1) % s->len)
-
-int		check_asc(t_stack *s)
+UINT	score(int ra, int rb)
 {
-	int		i;
-	int		o;
+	UINT	score;
+	UINT	min;
 
-	i = 0;
-	o = 0;
-	while (S[-o] != s->min)
-		o += 1;
-	while (i + 1 < s->len)
+	score = 0;
+	if (ra > 0 && rb > 0)
 	{
-		if (S[-I1] > S[-I2])
-			return (INT_MIN);
-		i += 1;
+		min = MIN(ABS(ra), ABS(rb));
+		score += min;
+		ra -= min;
+		rb -= min;
 	}
-	return (o);
+	if (ra < 0 && rb < 0)
+	{
+		min = MIN(ABS(ra), ABS(rb));
+		score += min;
+		ra += min;
+		rb += min;
+	}
+	score += ABS(ra);
+	score += ABS(rb);
+	return (score);
 }

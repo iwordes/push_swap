@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/17 11:00:40 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/26 18:43:27 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define H2(N) ((N >> 1) + (N & 1))
 
 # define ASSERT(C) if (!(C)) error();
+# define OP(O) op__(#O, op_##O, a, b)
 
 typedef struct	s_stack
 {
@@ -54,6 +55,9 @@ void			show(t_stack *a, t_stack *b, const char *op);
 
 int				check_asc(t_stack *s);
 int				check_desc(t_stack *s);
+
+UINT			score(int ra, int rb);
+void			smarot(t_stack *a, t_stack *b, int ra, int rb);
 
 void			sort(t_stack *a, t_stack *b);
 
