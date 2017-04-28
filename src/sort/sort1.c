@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/28 13:08:03 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/28 15:11:21 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		sort1(t_stack *a, t_stack *b)
 		OP(pb);
 	if (a->len > 2)
 		OP(pb);
-	while (a->len > 3)
+	while (a->len > 4)
 	{
 		best(a, b, &ra, &rb);
 		smarot(a, b, ra, rb);
