@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/26 18:58:25 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/28 13:08:03 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,14 @@ static void	best(t_stack *a, t_stack *b, int *best_ra, int *best_rb)
 
 void		sort1(t_stack *a, t_stack *b)
 {
-	int		left;
 	int		ra;
 	int		rb;
 
-	left = MAX((a->len / 10) * 8, 2);
 	if (a->len > 2)
 		OP(pb);
 	if (a->len > 2)
 		OP(pb);
-	while (a->len > left)
+	while (a->len > 3)
 	{
 		best(a, b, &ra, &rb);
 		smarot(a, b, ra, rb);
