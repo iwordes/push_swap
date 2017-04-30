@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/29 13:02:23 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/29 20:49:07 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/29 20:51:03 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 #define OH2(I, S) ((I % S->len) > S->len / 2)
 #define OPT(I, S) ((I % S->len) - (OH2(I, S) ? S->len : 0))
-
-/*
-** TODO: Account for situations where ra and rb would be opposite signs but
-** double-rotations can be abused for more efficiency.
-*/
 
 void	ropt(int *ra, int *rb, t_stack *a, t_stack *b)
 {
