@@ -41,6 +41,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	rm -f $(NAME)
+	rm -f checker
 
 .PHONY: re
 re: fclean all
