@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 13:11:17 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/16 14:50:12 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/05/01 14:56:34 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	validate(t_stack *a, long n, int argc, char **argv)
 		error();
 	if (n < INT_MIN || n > INT_MAX)
 		error();
-	while (i < a->len - argc)
+	while (i < a->len - argc - 1)
 	{
 		if (n == A[i])
 			error();
