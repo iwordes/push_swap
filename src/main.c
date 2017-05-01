@@ -84,6 +84,8 @@ int			main(int argc, char **argv)
 	t_stack	a;
 	t_stack	b;
 
+	if (argc == 1)
+		exit(0);
 	g_mn.ops = 0;
 	g_mn.show_ops = 0;
 	g_mn.show_vis = 0;
