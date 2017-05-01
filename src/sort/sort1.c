@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/29 21:03:35 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/30 19:51:10 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ void		sort1(t_stack *a, t_stack *b)
 	int		ra;
 	int		rb;
 
-	// Best: 37.5% of A
-	thres = THRES;
+	thres = (a->len / 10) * 4;
 	if (a->len > 2)
 		OP(pb);
 	if (a->len > 2)

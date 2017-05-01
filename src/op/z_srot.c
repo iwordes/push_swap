@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:43:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/17 17:24:52 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/30 19:53:21 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	putop(char *op, char s)
 	}
 }
 
-void	op__srot(t_stack *s, int o, char name)
+void		op__srot(t_stack *s, int o, char name)
 {
 	if (s->len < 2)
 		return ;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/29 20:59:38 by iwordes          ###   ########.fr       */
+/*   Created: 2017/04/30 19:38:08 by iwordes           #+#    #+#             */
+/*   Updated: 2017/04/30 19:38:47 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ void			minmax(t_stack *s);
 
 void			error(void);
 
-#define OARGS void (*f)(t_stack*, t_stack*), t_stack *a, t_stack *b
-void			op__(const char *s, OARGS);
+# define OARGS (*f)(t_stack*, t_stack*), t_stack *a, t_stack *b
+
+void			op__(const char *s, void OARGS);
 void			op__rot(t_stack *s);
 void			op__rrot(t_stack *s);
 void			op__srot(t_stack *s, int o, char name);

@@ -6,7 +6,7 @@
 #    By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/21 19:45:22 by iwordes           #+#    #+#              #
-#    Updated: 2017/04/30 19:35:16 by iwordes          ###   ########.fr        #
+#    Updated: 2017/04/30 19:55:29 by iwordes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CF    += -Wall -Wextra -Werror -I include
 CF    += -L lib/ft -lft -I lib/ft/include
 CF    += -L lib/arg -larg -I lib/arg
 
-SRC_OP = pa.c pb.c ra.c rb.c rr.c rra.c rrb.c rrr.c sa.c sb.c ss.c _.c _rot.c _rrot.c _swap.c _srot.c
+SRC_OP = pa.c pb.c ra.c rb.c rr.c rra.c rrb.c rrr.c sa.c sb.c ss.c z_.c z_rot.c z_rrot.c z_swap.c z_srot.c
 SRC    = check_asc.c check_desc.c error.c init.c main.c minmax.c show.c
 SRC   += sort/merge.c sort/sort1.c sort/sort2.c sort/score.c sort/smarot.c
 SRC   += sort/ropt.c sort/scoropt.c
