@@ -35,6 +35,7 @@ all: $(NAME) checker
 .PHONY: clean
 clean:
 	rm -rf build
+	make -C lib/arg fclean
 	make -C lib/ft fclean
 
 .PHONY: fclean
@@ -58,5 +59,5 @@ $(NAME): $(SRC) lib/ft/libft.a
 checker: $(SRC) lib/ft/libft.a lib/arg/libarg.a
 	$(CC) $(CF) -D CHECKER -o $@ $^
 
-lib/ft/libft.a:
-	make -j7 -C lib/ft
+%.a:
+	make -C $(@D)
