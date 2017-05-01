@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:41:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/27 14:55:21 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/30 12:10:29 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	cost(t_stack *a, int o, int n)
 	return (o + r);
 }
 
-#define COST (score(OPT(ra, a), OPT(rb, b)))
+#define COST (scoropt(ra, rb, a, b))
 #define BEST (score(*best_ra, *best_rb))
 
 static void	best(t_stack *a, t_stack *b, int *best_ra, int *best_rb)
@@ -51,8 +51,9 @@ static void	best(t_stack *a, t_stack *b, int *best_ra, int *best_rb)
 		ra = cost(a, o, B[-rb]);
 		if (COST < BEST)
 		{
-			*best_ra = OPT(ra, a);
-			*best_rb = OPT(rb, b);
+			*best_ra = ra;
+			*best_rb = rb;
+			ropt(best_ra, best_rb, a, b);
 		}
 		rb += 1;
 	}

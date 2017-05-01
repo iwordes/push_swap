@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 12:44:35 by iwordes           #+#    #+#             */
-/*   Updated: 2017/04/26 18:43:27 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/04/29 20:59:38 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ int				check_desc(t_stack *s);
 
 UINT			score(int ra, int rb);
 void			smarot(t_stack *a, t_stack *b, int ra, int rb);
+
+void			ropt(int *ra, int *rb, t_stack *a, t_stack *b);
+UINT			scoropt(int ra, int rb, t_stack *a, t_stack *b);
 
 void			sort(t_stack *a, t_stack *b);
 
